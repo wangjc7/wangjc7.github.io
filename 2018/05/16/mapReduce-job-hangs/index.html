@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="aaa," />
+  <meta name="keywords" content="hadoop,mapreduce," />
 
 
 
@@ -96,18 +96,20 @@
 
 
 
-<meta name="description" content="123public static void main(String[] args)&amp;#123;	System.out.println(&quot;ok&quot;);&amp;#125;">
-<meta name="keywords" content="aaa">
+<meta name="description" content="现象I tried to run simple word count as MapReduce job，but mapReduce job hangs, waiting for AM container to be allocated. Output from job: *** START *** 15/12/25 17:52:50 INFO client.RMProxy: Connecting">
+<meta name="keywords" content="hadoop,mapreduce">
 <meta property="og:type" content="article">
-<meta property="og:title" content="java code">
-<meta property="og:url" content="http://yoursite.com/2018/05/13/a/index.html">
+<meta property="og:title" content="mapReduce job hangs">
+<meta property="og:url" content="http://yoursite.com/2018/05/16/mapReduce-job-hangs/index.html">
 <meta property="og:site_name" content="橙子&#39;s Blog">
-<meta property="og:description" content="123public static void main(String[] args)&amp;#123;	System.out.println(&quot;ok&quot;);&amp;#125;">
+<meta property="og:description" content="现象I tried to run simple word count as MapReduce job，but mapReduce job hangs, waiting for AM container to be allocated. Output from job: *** START *** 15/12/25 17:52:50 INFO client.RMProxy: Connecting">
 <meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2018-05-13T13:43:33.000Z">
+<meta property="og:image" content="https://i.stack.imgur.com/rSXpb.png">
+<meta property="og:updated_time" content="2018-05-16T04:03:05.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="java code">
-<meta name="twitter:description" content="123public static void main(String[] args)&amp;#123;	System.out.println(&quot;ok&quot;);&amp;#125;">
+<meta name="twitter:title" content="mapReduce job hangs">
+<meta name="twitter:description" content="现象I tried to run simple word count as MapReduce job，but mapReduce job hangs, waiting for AM container to be allocated. Output from job: *** START *** 15/12/25 17:52:50 INFO client.RMProxy: Connecting">
+<meta name="twitter:image" content="https://i.stack.imgur.com/rSXpb.png">
 
 
 
@@ -136,13 +138,13 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/05/13/a/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/05/16/mapReduce-job-hangs/"/>
 
 
 
 
 
-  <title>java code | 橙子's Blog</title>
+  <title>mapReduce job hangs | 橙子's Blog</title>
   
 
 
@@ -285,7 +287,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/13/a/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/16/mapReduce-job-hangs/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="andrew.wang">
@@ -302,7 +304,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">java code</h1>
+          <h1 class="post-title" itemprop="name headline">mapReduce job hangs</h1>
         
 
         <div class="post-meta">
@@ -314,8 +316,8 @@
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-13T21:43:33+08:00">
-                2018-05-13
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T11:56:17+08:00">
+                2018-05-16
               </time>
             
 
@@ -337,8 +339,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/test/" itemprop="url" rel="index">
-                    <span itemprop="name">test</span>
+                  <a href="/categories/hadoop/" itemprop="url" rel="index">
+                    <span itemprop="name">hadoop</span>
                   </a>
                 </span>
 
@@ -374,7 +376,38 @@
       
 
       
-        <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">	System.out.println(<span class="string">"ok"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>I tried to run simple word count as MapReduce job，<br>but mapReduce job hangs, waiting for AM container to be allocated.</p>
+<p>Output from job:</p>
+<pre><code>*** START ***
+15/12/25 17:52:50 INFO client.RMProxy: Connecting to ResourceManager at /0.0.0.0:8032
+15/12/25 17:52:51 WARN mapreduce.JobResourceUploader: Hadoop command-line option parsing not performed. Implement the Tool interface and execute your application with ToolRunner to remedy this.
+15/12/25 17:52:51 INFO input.FileInputFormat: Total input paths to process : 5
+15/12/25 17:52:52 INFO mapreduce.JobSubmitter: number of splits:5
+15/12/25 17:52:52 INFO mapreduce.JobSubmitter: Submitting tokens for job: job_1451083949804_0001
+15/12/25 17:52:53 INFO impl.YarnClientImpl: Submitted application application_1451083949804_0001
+15/12/25 17:52:53 INFO mapreduce.Job: The url to track the job: http://hadoop-droplet:8088/proxy/application_1451083949804_0001/
+15/12/25 17:52:53 INFO mapreduce.Job: Running job: job_1451083949804_0001
+</code></pre><p>YarnApplicationState:<br>ACCEPTED: waiting for AM container to be allocated,launched and register with RM.</p>
+<p><img src="https://i.stack.imgur.com/rSXpb.png" alt="Mou icon"></p>
+<h1 id="诊断"><a href="#诊断" class="headerlink" title="诊断"></a>诊断</h1><p>You should check the status of Node managers in your cluster. If the NM nodes are short on disk space then RM will mark them “unhealthy” and those NMs can’t allocate new containers.</p>
+<p>1) Check the Unhealthy nodes: http://&lt;active_RM&gt;:8088/cluster/nodes/unhealthy</p>
+<p>If the “health report” tab says “local-dirs are bad” then it means you need to cleanup some disk space from these nodes.</p>
+<p>2) Check the DFS dfs.data.dir property in hdfs-site.xml. It points the location on local file system where hdfs data is stored.</p>
+<p>3) Login to those machines and use df -h &amp; hadoop fs - du -h commands to measure the space occupied.</p>
+<p>4) Verify hadoop trash and delete it if it’s blocking you. hadoop fs -du -h /user/user_name/.Trash and hadoop fs -rm -r /user/user_name/.Trash/*</p>
+<p>访问：<a href="http://yarn001:8088/cluster/nodes/unhealthy" target="_blank" rel="noopener">http://yarn001:8088/cluster/nodes/unhealthy</a></p>
+<p>发现符合第一种情况，Healthy报告如下：</p>
+<pre><code>1/1 local-dirs are bad: /tmp/hadoop-wang/nm-local-dir;
+1/1 log-dirs are bad: /Users/wang/soft/hadoop-2.7.5/logs/userlogs 
+</code></pre><p>关于该问题网上说最常见原因是由于节点上的磁盘使用率超出了max-disk-utilization-per-disk-percentage（默认为90.0%）。<br>wangdeMacBook-Pro:hadoop-2.7.5 wang$ df -h</p>
+<pre><code>Filesystem      Size   Used  Avail Capacity   iused   ifree %iused  Mounted on
+/dev/disk1     465Gi  446Gi   18Gi    97% 117017228 4822386   96%   /
+</code></pre><p>磁盘使用率已经是79%，确实是这个原因，但是这个可能只是表面原因。可以通过增加磁盘利用率阈值来缓解问题：<br>在yarn-site.xml中填写：</p>
+<pre><code>&lt;property&gt;
+    &lt;name&gt;yarn.nodemanager.disk-health-checker.max-disk-utilization-per-disk-percentage&lt;/name&gt;
+    &lt;value&gt;98.5&lt;/value&gt;
+&lt;/property&gt;
+</code></pre><p>但是增加阈值的方法治标不治本，迟早有一天会超过你设置的98.5%。<br>建议清理磁盘空间或扩容。<br>over.</p>
 
       
     </div>
@@ -392,7 +425,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/aaa/" rel="tag"># aaa</a>
+            <a href="/tags/hadoop/" rel="tag"># hadoop</a>
+          
+            <a href="/tags/mapreduce/" rel="tag"># mapreduce</a>
           
         </div>
       
@@ -405,8 +440,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/05/13/demo1/" rel="next" title="demo1">
-                <i class="fa fa-chevron-left"></i> demo1
+              <a href="/2018/05/15/单链表反转-Java/" rel="next" title="单链表反转(Java)">
+                <i class="fa fa-chevron-left"></i> 单链表反转(Java)
               </a>
             
           </div>
@@ -414,10 +449,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2018/05/13/hello-world/" rel="prev" title="Hello World">
-                Hello World <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -469,8 +500,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.gif"
@@ -539,6 +579,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#现象"><span class="nav-number">1.</span> <span class="nav-text">现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#诊断"><span class="nav-number">2.</span> <span class="nav-text">诊断</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
