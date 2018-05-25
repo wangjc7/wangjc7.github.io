@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="hive,udf," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="橙子's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="[转]Hive UDF整理字符串函数##字符串长度函数：length语法: length(string A)  返回值: int  说明：返回字符串A的长度  举例：  hive&amp;gt; select length(‘abcedfg’) from dual;  7 ##字符串反转函数：reverse语法: reverse(string A)  返回值: string  说明：返回字符串A的反转结果">
+<meta name="keywords" content="hive,udf">
+<meta property="og:type" content="article">
+<meta property="og:title" content="hive UDF整理">
+<meta property="og:url" content="http://yoursite.com/2018/05/25/hive-UDF整理/index.html">
+<meta property="og:site_name" content="橙子&#39;s Blog">
+<meta property="og:description" content="[转]Hive UDF整理字符串函数##字符串长度函数：length语法: length(string A)  返回值: int  说明：返回字符串A的长度  举例：  hive&amp;gt; select length(‘abcedfg’) from dual;  7 ##字符串反转函数：reverse语法: reverse(string A)  返回值: string  说明：返回字符串A的反转结果">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-05-25T01:38:17.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="hive UDF整理">
+<meta name="twitter:description" content="[转]Hive UDF整理字符串函数##字符串长度函数：length语法: length(string A)  返回值: int  说明：返回字符串A的长度  举例：  hive&amp;gt; select length(‘abcedfg’) from dual;  7 ##字符串反转函数：reverse语法: reverse(string A)  返回值: string  说明：返回字符串A的反转结果">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/05/25/hive-UDF整理/"/>
+
+
+
+
+
+  <title>hive UDF整理 | 橙子's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">橙子's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">挑战未知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/25/hive-UDF整理/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="andrew.wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="橙子's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">hive UDF整理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-25T09:10:16+08:00">
+                2018-05-25
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index">
+                    <span itemprop="name">hive</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="转-Hive-UDF整理"><a href="#转-Hive-UDF整理" class="headerlink" title="[转]Hive UDF整理"></a>[转]Hive UDF整理</h1><h2 id="字符串函数"><a href="#字符串函数" class="headerlink" title="字符串函数"></a>字符串函数</h2><h3 id="字符串长度函数：length"><a href="#字符串长度函数：length" class="headerlink" title="##字符串长度函数：length"></a>##字符串长度函数：length</h3><pre><code>语法: length(string A)
+
+返回值: int
+
+说明：返回字符串A的长度
+
+举例：
+
+hive&gt; select length(‘abcedfg’) from dual;
+
+7
+</code></pre><h3 id="字符串反转函数：reverse"><a href="#字符串反转函数：reverse" class="headerlink" title="##字符串反转函数：reverse"></a>##字符串反转函数：reverse</h3><pre><code>语法: reverse(string A)
+
+返回值: string
+
+说明：返回字符串A的反转结果
+
+举例：
+
+hive&gt; select reverse(‘abcedfg’) from dual;
+
+gfdecba
+</code></pre><h3 id="字符串连接函数：concat"><a href="#字符串连接函数：concat" class="headerlink" title="##字符串连接函数：concat"></a>##字符串连接函数：concat</h3><pre><code>语法: concat(string A, string B…)
+
+返回值: string
+
+说明：返回输入字符串连接后的结果，支持任意个输入字符串
+
+举例：
+
+hive&gt; select concat(‘abc’,&apos;def’,&apos;gh’) from dual;
+
+abcdefgh
+</code></pre><h3 id="带分隔符字符串连接函数：concat-ws"><a href="#带分隔符字符串连接函数：concat-ws" class="headerlink" title="##带分隔符字符串连接函数：concat_ws"></a>##带分隔符字符串连接函数：concat_ws</h3><pre><code>语法: concat_ws(string SEP, string A, string B…)
+
+返回值: string
+
+说明：返回输入字符串连接后的结果，SEP表示各个字符串间的分隔符
+
+举例：
+
+hive&gt; select concat_ws(‘,’,&apos;abc’,&apos;def’,&apos;gh’) from dual;
+
+abc,def,gh
+</code></pre><h3 id="字符串截取函数：substr-substring"><a href="#字符串截取函数：substr-substring" class="headerlink" title="##字符串截取函数：substr,substring"></a>##字符串截取函数：substr,substring</h3><pre><code>语法: substr(string A, int start),substring(string A, int start)
+
+返回值: string
+
+说明：返回字符串A从start位置到结尾的字符串
+
+举例：
+
+hive&gt; select substr(‘abcde’,3) from dual;
+
+cde
+
+hive&gt; select substring(‘abcde’,3) from dual;
+
+cde
+
+hive&gt;  select substr(‘abcde’,-1) from dual;  （和ORACLE相同）
+
+e
+</code></pre><h3 id="字符串截取函数：substr-substring-1"><a href="#字符串截取函数：substr-substring-1" class="headerlink" title="##字符串截取函数：substr,substring"></a>##字符串截取函数：substr,substring</h3><pre><code>语法: substr(string A, int start, int len),substring(string A, int start, int len)
+
+返回值: string
+
+说明：返回字符串A从start位置开始，长度为len的字符串
+
+举例：
+
+hive&gt; select substr(‘abcde’,3,2) from dual;
+
+cd
+
+hive&gt; select substring(‘abcde’,3,2) from dual;
+
+cd
+
+hive&gt;select substring(‘abcde’,-2,2) from dual;
+
+de
+</code></pre><h3 id="字符串转大写函数：upper-ucase"><a href="#字符串转大写函数：upper-ucase" class="headerlink" title="##字符串转大写函数：upper,ucase"></a>##字符串转大写函数：upper,ucase</h3><pre><code>语法: upper(string A) ucase(string A)
+
+返回值: string
+
+说明：返回字符串A的大写格式
+
+举例：
+
+hive&gt; select upper(‘abSEd’) from dual;
+
+ABSED
+
+hive&gt; select ucase(‘abSEd’) from dual;
+
+ABSED
+</code></pre><h3 id="字符串转小写函数：lower-lcase"><a href="#字符串转小写函数：lower-lcase" class="headerlink" title="##字符串转小写函数：lower,lcase"></a>##字符串转小写函数：lower,lcase</h3><pre><code>语法: lower(string A) lcase(string A)
+
+返回值: string
+
+说明：返回字符串A的小写格式
+
+举例：
+
+hive&gt; select lower(‘abSEd’) from dual;
+
+absed
+
+hive&gt; select lcase(‘abSEd’) from dual;
+
+absed
+</code></pre><h3 id="去空格函数：trim"><a href="#去空格函数：trim" class="headerlink" title="##去空格函数：trim"></a>##去空格函数：trim</h3><pre><code>语法: trim(string A)
+
+返回值: string
+
+说明：去除字符串两边的空格
+
+举例：
+
+hive&gt; select trim(‘ abc ‘) from dual;
+
+abc
+</code></pre><h3 id="左边去空格函数：ltrim"><a href="#左边去空格函数：ltrim" class="headerlink" title="##左边去空格函数：ltrim"></a>##左边去空格函数：ltrim</h3><pre><code>语法: ltrim(string A)
+
+返回值: string
+
+说明：去除字符串左边的空格
+
+举例：
+
+hive&gt; select ltrim(‘ abc ‘) from dual;
+
+abc
+</code></pre><h3 id="右边去空格函数：rtrim"><a href="#右边去空格函数：rtrim" class="headerlink" title="##右边去空格函数：rtrim"></a>##右边去空格函数：rtrim</h3><pre><code>语法: rtrim(string A)
+
+返回值: string
+
+说明：去除字符串右边的空格
+
+举例：
+
+hive&gt; select rtrim(‘ abc ‘) from dual;
+
+abc
+</code></pre><h3 id="正则表达式替换函数：regexp-replace"><a href="#正则表达式替换函数：regexp-replace" class="headerlink" title="##正则表达式替换函数：regexp_replace"></a>##正则表达式替换函数：regexp_replace</h3><pre><code>语法: regexp_replace(string A, string B, string C)
+
+返回值: string
+
+说明：将字符串A中的符合java正则表达式B的部分替换为C。注意，在有些情况下要使用转义字符
+
+举例：
+
+hive&gt; select regexp_replace(‘foobar’, ‘oo|ar’, ”) from dual;
+
+fb
+</code></pre><h3 id="正则表达式解析函数：regexp-extract"><a href="#正则表达式解析函数：regexp-extract" class="headerlink" title="##正则表达式解析函数：regexp_extract"></a>##正则表达式解析函数：regexp_extract</h3><pre><code>语法: regexp_extract(string subject, string pattern, int index)
+
+返回值: string
+
+说明：将字符串subject按照pattern正则表达式的规则拆分，返回index指定的字符。注意，在有些情况下要使用转义字符
+
+举例：
+
+hive&gt; select regexp_extract(‘foothebar’, ‘foo(.*?)(bar)’, 1) from dual;
+
+the
+
+hive&gt; select regexp_extract(‘foothebar’, ‘foo(.*?)(bar)’, 2) from dual;
+
+bar
+
+hive&gt; select regexp_extract(‘foothebar’, ‘foo(.*?)(bar)’, 0) from dual;
+
+foothebar
+</code></pre><h3 id="URL解析函数：parse-url"><a href="#URL解析函数：parse-url" class="headerlink" title="##URL解析函数：parse_url"></a>##URL解析函数：parse_url</h3><pre><code>语法: parse_url(string urlString, string partToExtract [, string keyToExtract])
+
+返回值: string
+
+说明：返回URL中指定的部分。partToExtract的有效值为：HOST, PATH, QUERY, REF, PROTOCOL, AUTHORITY, FILE, and USERINFO.
+
+举例：
+
+hive&gt; select parse_url(‘http://facebook.com/path1/p.php?k1=v1&amp;k2=v2#Ref1′, ‘HOST’) from dual;
+
+facebook.com
+
+hive&gt; select parse_url(‘http://facebook.com/path1/p.php?k1=v1&amp;k2=v2#Ref1′, ‘QUERY’, ‘k1′) from dual;
+
+v1
+</code></pre><h3 id="json解析函数：get-json-object"><a href="#json解析函数：get-json-object" class="headerlink" title="##json解析函数：get_json_object"></a>##json解析函数：get_json_object</h3><pre><code>语法: get_json_object(string json_string, string path)
+
+返回值: string
+
+说明：解析json的字符串json_string,返回path指定的内容。如果输入的json字符串无效，那么返回NULL。
+
+举例：
+
+hive&gt; select  get_json_object(&apos;{&quot;store&quot;:{&quot;fruit&quot;:[{&quot;weight&quot;:8,&quot;type&quot;:&quot;apple&quot;},{&quot;weight&quot;:9,&quot;type&quot;:&quot;pear&quot;}],&quot;bicycle&quot;:{&quot;price&quot;:19.95,&quot;color&quot;:&quot;red&quot;}},&quot;email&quot;:&quot;amy@only_for_json_udf_test.net&quot;,&quot;owner&quot;:&quot;amy&quot;}&apos;,&apos;$.owner&apos;) from dual;
+amy
+</code></pre><h3 id="空格字符串函数：space"><a href="#空格字符串函数：space" class="headerlink" title="##空格字符串函数：space"></a>##空格字符串函数：space</h3><pre><code>语法: space(int n)
+
+返回值: string
+
+说明：返回长度为n的字符串
+
+举例：
+
+hive&gt; select space(10) from dual;
+
+hive&gt; select length(space(10)) from dual;
+
+10
+</code></pre><h3 id="重复字符串函数：repeat"><a href="#重复字符串函数：repeat" class="headerlink" title="##重复字符串函数：repeat"></a>##重复字符串函数：repeat</h3><pre><code>语法: repeat(string str, int n)
+
+返回值: string
+
+说明：返回重复n次后的str字符串
+
+举例：
+
+hive&gt; select repeat(‘abc’,5) from dual;
+
+abcabcabcabcabc
+</code></pre><h3 id="首字符ascii函数：ascii"><a href="#首字符ascii函数：ascii" class="headerlink" title="##首字符ascii函数：ascii"></a>##首字符ascii函数：ascii</h3><pre><code>语法: ascii(string str)
+
+返回值: int
+
+说明：返回字符串str第一个字符的ascii码
+
+举例：
+
+hive&gt; select ascii(‘abcde’) from dual;
+
+97
+</code></pre><h3 id="左补足函数：lpad"><a href="#左补足函数：lpad" class="headerlink" title="##左补足函数：lpad"></a>##左补足函数：lpad</h3><pre><code>语法: lpad(string str, int len, string pad)
+
+返回值: string
+
+说明：将str进行用pad进行左补足到len位
+
+举例：
+
+hive&gt; select lpad(‘abc’,10,’td’) from dual;
+
+tdtdtdtabc
+
+与GP，ORACLE不同，pad 不能默认
+</code></pre><h3 id="右补足函数：rpad"><a href="#右补足函数：rpad" class="headerlink" title="##右补足函数：rpad"></a>##右补足函数：rpad</h3><pre><code>语法: rpad(string str, int len, string pad)
+
+返回值: string
+
+说明：将str进行用pad进行右补足到len位
+
+举例：
+
+hive&gt; select rpad(‘abc’,10,’td’) from dual;
+
+abctdtdtdt
+</code></pre><h3 id="分割字符串函数-split"><a href="#分割字符串函数-split" class="headerlink" title="##分割字符串函数: split"></a>##分割字符串函数: split</h3><pre><code>语法:  split(string str, string pat)
+
+返回值:  array
+
+说明: 按照pat字符串分割str，会返回分割后的字符串数组
+
+举例：
+
+hive&gt; select split(‘abtcdtef’,&apos;t’) from dual;
+
+[&quot;ab&quot;,&quot;cd&quot;,&quot;ef&quot;]
+</code></pre><h3 id="集合查找函数-find-in-set"><a href="#集合查找函数-find-in-set" class="headerlink" title="##集合查找函数: find_in_set"></a>##集合查找函数: find_in_set</h3><pre><code>语法: find_in_set(string str, string strList)
+
+返回值: int
+
+说明: 返回str在strlist第一次出现的位置，strlist是用逗号分割的字符串。如果没有找该str字符，则返回0（只能是逗号分隔，不然返回0）
+
+举例：
+
+hive&gt; select find_in_set(‘ab’,&apos;ef,ab,de’) from dual;
+
+2
+
+hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
+
+0
+</code></pre>
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/hive/" rel="tag"># hive</a>
+          
+            <a href="/tags/udf/" rel="tag"># udf</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/19/Python正则表达式匹配反斜杠/" rel="next" title="Python正则表达式匹配反斜杠">
+                <i class="fa fa-chevron-left"></i> Python正则表达式匹配反斜杠
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="andrew.wang" />
+          <p class="site-author-name" itemprop="name">andrew.wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">todoit.com.cn</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">13</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#转-Hive-UDF整理"><span class="nav-number">1.</span> <span class="nav-text">[转]Hive UDF整理</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#字符串函数"><span class="nav-number">1.1.</span> <span class="nav-text">字符串函数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串长度函数：length"><span class="nav-number">1.1.1.</span> <span class="nav-text">##字符串长度函数：length</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串反转函数：reverse"><span class="nav-number">1.1.2.</span> <span class="nav-text">##字符串反转函数：reverse</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串连接函数：concat"><span class="nav-number">1.1.3.</span> <span class="nav-text">##字符串连接函数：concat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#带分隔符字符串连接函数：concat-ws"><span class="nav-number">1.1.4.</span> <span class="nav-text">##带分隔符字符串连接函数：concat_ws</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串截取函数：substr-substring"><span class="nav-number">1.1.5.</span> <span class="nav-text">##字符串截取函数：substr,substring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串截取函数：substr-substring-1"><span class="nav-number">1.1.6.</span> <span class="nav-text">##字符串截取函数：substr,substring</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串转大写函数：upper-ucase"><span class="nav-number">1.1.7.</span> <span class="nav-text">##字符串转大写函数：upper,ucase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字符串转小写函数：lower-lcase"><span class="nav-number">1.1.8.</span> <span class="nav-text">##字符串转小写函数：lower,lcase</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#去空格函数：trim"><span class="nav-number">1.1.9.</span> <span class="nav-text">##去空格函数：trim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左边去空格函数：ltrim"><span class="nav-number">1.1.10.</span> <span class="nav-text">##左边去空格函数：ltrim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右边去空格函数：rtrim"><span class="nav-number">1.1.11.</span> <span class="nav-text">##右边去空格函数：rtrim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式替换函数：regexp-replace"><span class="nav-number">1.1.12.</span> <span class="nav-text">##正则表达式替换函数：regexp_replace</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#正则表达式解析函数：regexp-extract"><span class="nav-number">1.1.13.</span> <span class="nav-text">##正则表达式解析函数：regexp_extract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#URL解析函数：parse-url"><span class="nav-number">1.1.14.</span> <span class="nav-text">##URL解析函数：parse_url</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#json解析函数：get-json-object"><span class="nav-number">1.1.15.</span> <span class="nav-text">##json解析函数：get_json_object</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空格字符串函数：space"><span class="nav-number">1.1.16.</span> <span class="nav-text">##空格字符串函数：space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#重复字符串函数：repeat"><span class="nav-number">1.1.17.</span> <span class="nav-text">##重复字符串函数：repeat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#首字符ascii函数：ascii"><span class="nav-number">1.1.18.</span> <span class="nav-text">##首字符ascii函数：ascii</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#左补足函数：lpad"><span class="nav-number">1.1.19.</span> <span class="nav-text">##左补足函数：lpad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#右补足函数：rpad"><span class="nav-number">1.1.20.</span> <span class="nav-text">##右补足函数：rpad</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分割字符串函数-split"><span class="nav-number">1.1.21.</span> <span class="nav-text">##分割字符串函数: split</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#集合查找函数-find-in-set"><span class="nav-number">1.1.22.</span> <span class="nav-text">##集合查找函数: find_in_set</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">andrew.wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
