@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="nodemanager,cdh," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="橙子's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="现象cloudera manager agent bug report——can’t start tasktracker cloudera manager 4.8 + CDH4.4 + centos5、6agent log below when start TT by CM  [10/Feb/2014 09:08:44 +0000] 105652 MainThread util ERROR Fai">
+<meta name="keywords" content="nodemanager,cdh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Error found before invoking supervisord: dictionary update sequence element #100 has length 1; 2 is required">
+<meta property="og:url" content="http://yoursite.com/2018/06/04/Error-found-before-invoking-supervisord-dictionary-update-sequence-element-100-has-length-1-2-is-required/index.html">
+<meta property="og:site_name" content="橙子&#39;s Blog">
+<meta property="og:description" content="现象cloudera manager agent bug report——can’t start tasktracker cloudera manager 4.8 + CDH4.4 + centos5、6agent log below when start TT by CM  [10/Feb/2014 09:08:44 +0000] 105652 MainThread util ERROR Fai">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2018-06-04T10:15:16.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Error found before invoking supervisord: dictionary update sequence element #100 has length 1; 2 is required">
+<meta name="twitter:description" content="现象cloudera manager agent bug report——can’t start tasktracker cloudera manager 4.8 + CDH4.4 + centos5、6agent log below when start TT by CM  [10/Feb/2014 09:08:44 +0000] 105652 MainThread util ERROR Fai">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/06/04/Error-found-before-invoking-supervisord-dictionary-update-sequence-element-100-has-length-1-2-is-required/"/>
+
+
+
+
+
+  <title>Error found before invoking supervisord: dictionary update sequence element #100 has length 1; 2 is required | 橙子's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">橙子's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">挑战未知</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            Categories
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            Archives
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            Tags
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/06/04/Error-found-before-invoking-supervisord-dictionary-update-sequence-element-100-has-length-1-2-is-required/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="andrew.wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="橙子's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Error found before invoking supervisord: dictionary update sequence element #100 has length 1; 2 is required</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-06-04T17:36:07+08:00">
+                2018-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h1><p>cloudera manager agent bug report——can’t start tasktracker</p>
+<p>cloudera manager 4.8 + CDH4.4 + centos5、6agent log below when start TT by CM</p>
+<hr>
+<p>[10/Feb/2014 09:08:44 +0000] 105652 MainThread util ERROR Failed to parse environment variables: CDH_HCAT_HOME=/usr/lib/hcatalog<br>HADOOP_LOGFILE=hadoop-cmf-mapreduce1-TASKTRACKER-dn3.hadoop.com.log.out<br>TOMCAT_HOME=/usr/lib/bigtop-tomcat<br>HOSTNAME=dn3.hadoop.com<br>HADOOP_SECURITY_LOGGER=INFO,RFAS<br>CDH_SOLR_HOME=/usr/lib/solr<br>CDH_PIG_HOME=/usr/lib/pig<br>HADOOP_LOG_DIR=/var/log/hadoop-0.20-mapreduce<br>CLOUDERA_MYSQL_CONNECTOR_JAR=/usr/share/java/mysql-connector-java.jar<br>SHELL=/bin/bash<br>TERM=linux<br>HISTSIZE=1000<br>SSH_CLIENT=61.135.207.195 50583 22<br>CDH_HUE_PLUGINS_HOME=/usr/lib/hadoop<br>CDH_HIVE_HOME=/usr/lib/hive<br>QTDIR=/usr/lib64/qt-3.3<br>QTINC=/usr/lib64/qt-3.3/include<br>SSH_TTY=/dev/pts/2<br>CLOUDERA_ORACLE_CONNECTOR_JAR=/usr/share/java/oracle-connector-java.jar<br>HIVE_DEFAULT_XML=/etc/hive/conf.dist/hive-default.xml<br>CDH_VERSION=4<br>MGMT_HOME=/usr/share/cmf<br>CMF_CONF_DIR=/etc/cloudera-scm-agent<br>USER=root<br>JSVC_HOME=/usr/libexec/bigtop-utils<br>LS_COLORS=rs=0:di=01;34:ln=01;36:mh=00:pi=40;33:so=01;35:do=01;35:bd=40;33;01:cd=40;33;01:or=40;31;01:mi=01;05;37;41:su=37;41:sg=30;43:ca=30;41:tw=30;42:ow=34;42:st=37;44:ex=01;32:<em>.tar=01;31:</em>.tgz=01;31:<em>.arj=01;31:</em>.taz=01;31:<em>.lzh=01;31:</em>.lzma=01;31:<em>.tlz=01;31:</em>.txz=01;31:<em>.zip=01;31:</em>.z=01;31:<em>.Z=01;31:</em>.dz=01;31:<em>.gz=01;31:</em>.lz=01;31:<em>.xz=01;31:</em>.bz2=01;31:<em>.tbz=01;31:</em>.tbz2=01;31:<em>.bz=01;31:</em>.tz=01;31:<em>.deb=01;31:</em>.rpm=01;31:<em>.jar=01;31:</em>.rar=01;31:<em>.ace=01;31:</em>.zoo=01;31:<em>.cpio=01;31:</em>.7z=01;31:<em>.rz=01;31:</em>.jpg=01;35:<em>.jpeg=01;35:</em>.gif=01;35:<em>.bmp=01;35:</em>.pbm=01;35:<em>.pgm=01;35:</em>.ppm=01;35:<em>.tga=01;35:</em>.xbm=01;35:<em>.xpm=01;35:</em>.tif=01;35:<em>.tiff=01;35:</em>.png=01;35:<em>.svg=01;35:</em>.svgz=01;35:<em>.mng=01;35:</em>.pcx=01;35:<em>.mov=01;35:</em>.mpg=01;35:<em>.mpeg=01;35:</em>.m2v=01;35:<em>.mkv=01;35:</em>.ogm=01;35:<em>.mp4=01;35:</em>.m4v=01;35:<em>.mp4v=01;35:</em>.vob=01;35:<em>.qt=01;35:</em>.nuv=01;35:<em>.wmv=01;35:</em>.asf=01;35:<em>.rm=01;35:</em>.rmvb=01;35:<em>.flc=01;35:</em>.avi=01;35:<em>.fli=01;35:</em>.flv=01;35:<em>.gl=01;35:</em>.dl=01;35:<em>.xcf=01;35:</em>.xwd=01;35:<em>.yuv=01;35:</em>.cgm=01;35:<em>.emf=01;35:</em>.axv=01;35:<em>.anx=01;35:</em>.ogv=01;35:<em>.ogx=01;35:</em>.aac=01;36:<em>.au=01;36:</em>.flac=01;36:<em>.mid=01;36:</em>.midi=01;36:<em>.mka=01;36:</em>.mp3=01;36:<em>.mpc=01;36:</em>.ogg=01;36:<em>.ra=01;36:</em>.wav=01;36:<em>.axa=01;36:</em>.oga=01;36:<em>.spx=01;36:</em>.xspf=01;36:<br>SSH_AUTH_SOCK=/tmp/ssh-REFP104132/agent.104132<br>CDH_IMPALA_HOME=/usr/lib/impala<br>CDH_HTTPFS_HOME=/usr/lib/hadoop-httpfs<br>CDH_MR2_HOME=/usr/lib/hadoop-mapreduce<br>CDH_MR1_HOME=/usr/lib/hadoop-0.20-mapreduce<br>CDH_HUE_HOME=/usr/share/hue<br>CM_STATUS_CODES=STATUS_NONE HDFS_DFS_DIR_NOT_EMPTY JOBTRACKER_IN_STANDBY_MODE<br>MAIL=/var/spool/mail/root<br>PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/kerberos/bin<br>CONF_DIR=/var/run/cloudera-scm-agent/process/364-mapreduce-TASKTRACKER<br>PWD=/var/log/cloudera-scm-agent<br>LANG=zh_CN.UTF-8<br>KDE_IS_PRELINKED=1<br>CDH_HADOOP_HOME=/usr/lib/hadoop<br>MODULEPATH=/usr/share/Modules/modulefiles:/etc/modulefiles<br>LOADEDMODULES=<br>KDEDIRS=/usr<br>HADOOP_AUDIT_LOGGER=INFO,RFAAUDIT<br>CDH_SQOOP2_HOME=/usr/lib/sqoop2<br>HISTCONTROL=ignoredups<br>KRB5CCNAME=/tmp/krb5cc_cm_agent<br>CDH_HDFS_HOME=/usr/lib/hadoop-hdfs<br>CDH_HADOOP_BIN=/usr/bin/hadoop<br>SSH_ASKPASS=/usr/libexec/openssh/gnome-ssh-askpass<br>SHLVL=3<br>HOME=/root<br>CDH_OOZIE_HOME=/usr/lib/oozie<br>CDH_HBASE_INDEXER_HOME=/usr/lib/hbase-solr<br>CDH_FLUME_HOME=/usr/lib/flume-ng<br>LOGNAME=root<br>QTLIB=/usr/lib64/qt-3.3/lib<br>CVS_RSH=ssh<br>SSH_CONNECTION=61.135.207.195 50583 223.202.52.31 22<br>CDH_HBASE_HOME=/usr/lib/hbase<br>CDH_ZOOKEEPER_HOME=/usr/lib/zookeeper<br>MODULESHOME=/usr/share/Modules<br>CDH_YARN_HOME=/usr/lib/hadoop-yarn<br>LESSOPEN=|/usr/bin/lesspipe.sh %s<br>HADOOP_TASKTRACKER_OPTS=-Xms1073741824 -Xmx1073741824 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -Dhadoop.event.appender=,EventCatcher -Dhadoop.security.logger=INFO,RFAS<br>HADOOP_ROOT_LOGGER=INFO,RFA<br>CMF_PACKAGE_DIR=/usr/lib64/cmf/service<br>CLOUDERA_POSTGRESQL_JDBC_JAR=/usr/share/cmf/lib/postgresql-9.0-801.jdbc4.jar<br>G_BROKEN_FILENAMES=1<br>HISTTIMEFORMAT=%F %T<br>module=() { eval `/usr/bin/modulecmd bash $*`<br>}<br>_=/bin/env<br>Traceback (most recent call last):<br>File “/usr/lib64/cmf/agent/src/cmf/util.py”, line 286, in source<br>return dict((line.split(“=”, 1) for line in data.splitlines()))<br>ValueError: dictionary update sequence element #71 has length 1; 2 is required<br>[10/Feb/2014 09:08:44 +0000] 105652 MainThread agent ERROR Failed to activate {u’status_links’: {u’status’: u’<a href="http://dn3.hadoop.com:50060/&#39;}" target="_blank" rel="noopener">http://dn3.hadoop.com:50060/&#39;}</a>, u’name’: u’mapreduce-TASKTRACKER’, u’config_generation’: 5, u’configuration_data’: ‘PK</p>
+<p>…(省略)</p>
+<p>u’refresh_files’: [], u’user’: u’mapred’, u’auto_restart’: True, u’run_generation’: 1, u’parcels’: {}, u’environment’: {u’HADOOP_AUDIT_LOGGER’: u’INFO,RFAAUDIT’, u’HADOOP_TASKTRACKER_OPTS’: u’-Xms1073741824 -Xmx1073741824 -XX:+UseParNewGC -XX:+UseConcMarkSweepGC -XX:-CMSConcurrentMTEnabled -XX:CMSInitiatingOccupancyFraction=70 -XX:+CMSParallelRemarkEnabled -Dhadoop.event.appender=,EventCatcher -Dhadoop.security.logger=INFO,RFAS’, u’HADOOP_SECURITY_LOGGER’: u’INFO,RFAS’, u’HADOOP_LOG_DIR’: u’/var/log/hadoop-0.20-mapreduce’, u’HADOOP_ROOT_LOGGER’: u’INFO,RFA’, u’HADOOP_LOGFILE’: u’hadoop-cmf-mapreduce1-TASKTRACKER-dn3.hadoop.com.log.out’, u’CDH_VERSION’: u’4’}, u’optional_tags’: [u’cdh-plugin’, u’mapreduce-plugin’], u’running’: True, u’program’: u’mapreduce/mapreduce.sh’, u’required_tags’: [u’cdh’], u’arguments’: [u’tasktracker’], u’special_file_info’: [{u’permissions’: 420, u’deploy_dir’: u’$CDH_MR1_HOME/conf’, u’group’: u’root’, u’name’: u’taskcontroller.cfg’, u’user’: u’root’}], u’group’: u’hadoop’, u’id’: 364, u’resources’: [{u’file’: None, u’tcp_listen’: None, u’dynamic’: True, u’io’: None, u’memory’: None, u’directory’: None, u’cpu’: {u’shares’: 1024}}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: True, u’io’: {u’weight’: 500}, u’memory’: None, u’directory’: None, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: {u’hard_limit’: -1, u’soft_limit’: -1}, u’directory’: None, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: {u’path’: u’/var/log/hadoop-0.20-mapreduce’, u’bytes_free_warning_threshhold_bytes’: 0, u’group’: u’hadoop’, u’user’: u’root’, u’mode’: 509}, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: {u’path’: u’/var/lib/hadoop-mapreduce’, u’bytes_free_warning_threshhold_bytes’: 0, u’group’: u’hadoop’, u’user’: u’mapred’, u’mode’: 493}, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: {u’path’: u’/data2/mapred/local’, u’bytes_free_warning_threshhold_bytes’: 0, u’group’: u’hadoop’, u’user’: u’mapred’, u’mode’: 493}, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: {u’path’: u’/data3/mapred/local’, u’bytes_free_warning_threshhold_bytes’: 0, u’group’: u’hadoop’, u’user’: u’mapred’, u’mode’: 493}, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: {u’path’: u’/data4/mapred/local’, u’bytes_free_warning_threshhold_bytes’: 0, u’group’: u’hadoop’, u’user’: u’mapred’, u’mode’: 493}, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: {u’path’: u’/data5/mapred/local’, u’bytes_free_warning_threshhold_bytes’: 0, u’group’: u’hadoop’, u’user’: u’mapred’, u’mode’: 493}, u’cpu’: None}, {u’file’: None, u’tcp_listen’: None, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: {u’path’: u’/data6/mapred/local’, u’bytes_free_warning_threshhold_bytes’: 0, u’group’: u’hadoop’, u’user’: u’mapred’, u’mode’: 493}, u’cpu’: None}, {u’file’: None, u’tcp_listen’: {u’bind_address’: u’172.16.11.187’, u’port’: 50060}, u’dynamic’: False, u’io’: None, u’memory’: None, u’directory’: None, u’cpu’: None}], u’one_off’: False}<br>Traceback (most recent call last):<br>File “/usr/lib64/cmf/agent/src/cmf/agent.py”, line 1004, in handle_heartbeat_response<br>new_process.activate()<br>File “/usr/lib64/cmf/agent/src/cmf/agent.py”, line 1899, in activate<br>self.write_process_conf()<br>File “/usr/lib64/cmf/agent/src/cmf/agent.py”, line 1990, in write_process_conf<br>“source_parcel_environment”, env))<br>File “/usr/lib64/cmf/agent/src/cmf/util.py”, line 289, in source<br>raise e<br><strong><em>ValueError: dictionary update sequence element #71 has length 1; 2 is required</em></strong></p>
+<p>==========================</p>
+<p>when i run linux command ‘env’ ,i saw some line has no symbol ‘=’：</p>
+<p>#env</p>
+<p>…<br>module=() { eval `/usr/bin/modulecmd bash $*`<br>}        &lt;&lt;&lt;== look here<br>_=/bin/env</p>
+<p>according to error log, i open agent file “/usr/lib64/cmf/agent/src/cmf/util.py “, line 271-289:</p>
+<p>271 def source(path, command, caller_env):<br>272 “””<br>273 Source a shell script in a subprocess and extract its environment and return<br>274 it as a dict. For our specific purposes we need to support executing a command<br>275 after sourcing the script to correctly populate the environment.<br>276 “””<br>277 for k, v in caller_env.iteritems():<br>278 if v is None:<br>279 LOG.warn(“None environment value: %s=%s” % (k, v,))<br>280<br>281 pipe = subprocess.Popen([‘/bin/bash’, ‘-c’, “. %s; %s; env | grep =” % (path, command)],<br>282 stdout=subprocess.PIPE, env=caller_env)<br>283 data = pipe.communicate()[0]<br>284<br>285 try:<br>286     return dict((line.split(“=”, 1) for line in data.splitlines()))    &lt;&lt;&lt;&lt;&lt;=== look here<br>287 except Exception, e:<br>288     LOG.exception(“Failed to parse environment variables: “ + data)<br>289     raise e</p>
+<p>line 286 split line by “=”, then add to dict. when the line not contans ‘=’, error would throws.</p>
+<h1 id="解决"><a href="#解决" class="headerlink" title="解决"></a>解决</h1><p>fix it:</p>
+<hr>
+<p>change<br>281 pipe = subprocess.Popen([‘/bin/bash’, ‘-c’, “. %s; %s; env” % (path, command)],</p>
+<p>to<br>281 pipe = subprocess.Popen([‘/bin/bash’, ‘-c’, “. %s; %s; env | grep =” % (path, command)],</p>
+<p>then:<br>/etc/init.d/cloudera-scm-agent restart<br>open cloudera manager, start TT</p>
+<p>The most likely reason this is occurring is because the Cloudera Manager agent was started by invoking the init.d script rather than using the service command</p>
+<p>(BAD)</p>
+<p>/etc/init.d/cloudera-scm-agent start<br>(GOOD)<br>service cloudera-scm-agent start</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://community.cloudera.com/t5/Cloudera-Manager-Installation/Can-t-start-the-tasktracker/td-p/20596" target="_blank" rel="noopener">http://community.cloudera.com/t5/Cloudera-Manager-Installation/Can-t-start-the-tasktracker/td-p/20596</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/nodemanager/" rel="tag"># nodemanager</a>
+          
+            <a href="/tags/cdh/" rel="tag"># cdh</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/25/hive-UDF整理/" rel="next" title="hive UDF整理">
+                <i class="fa fa-chevron-left"></i> hive UDF整理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/avatar.gif"
+               alt="andrew.wang" />
+          <p class="site-author-name" itemprop="name">andrew.wang</p>
+           
+              <p class="site-description motion-element" itemprop="description">todoit.com.cn</p>
+          
+        </div>
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+              <a href="/archives/">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">posts</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">9</span>
+                <span class="site-state-item-name">categories</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">tags</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#现象"><span class="nav-number">1.</span> <span class="nav-text">现象</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#解决"><span class="nav-number">2.</span> <span class="nav-text">解决</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">3.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">andrew.wang</span>
+</div>
+
+
+<div class="powered-by">
+  Powered by <a class="theme-link" href="https://hexo.io">Hexo</a>
+</div>
+
+<div class="theme-info">
+  Theme -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Muse
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

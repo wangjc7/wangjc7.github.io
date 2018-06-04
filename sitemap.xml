@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://yoursite.com/2018/06/04/Error-found-before-invoking-supervisord-dictionary-update-sequence-element-100-has-length-1-2-is-required/</loc>
+    
+    <lastmod>2018-06-04T10:15:16.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://yoursite.com/2018/05/25/hive-UDF%E6%95%B4%E7%90%86/</loc>
     
     <lastmod>2018-05-25T01:44:13.000Z</lastmod>
