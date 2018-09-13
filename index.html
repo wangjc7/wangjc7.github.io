@@ -319,6 +319,195 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/Hive分组取TopN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="andrew.wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="橙子's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/13/Hive分组取TopN/" itemprop="url">Hive分组取TopN</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-13T16:03:56+08:00">
+                2018-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/hive/" itemprop="url" rel="index">
+                    <span itemprop="name">hive</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Hive在0.11.0版本开始加入了row_number、rank、dense_rank分析函数，可以查询分组排序后的top值</p>
+<h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><p>row_number() over ([partition col1] [order by col2])</p>
+<p>rank() over ([partition col1] [order by col2])</p>
+<p>dense_rank() over ([partition col1] [order by col2])</p>
+<p>它们都是根据col1字段分组，然后对col2字段进行排序，对排序后的每行生成一个行号，这个行号从1开始递增<br>col1、col2都可以是多个字段，用’,’分隔</p>
+<p><strong>区别</strong>：</p>
+<ol>
+<li><p>row_number：不管col2字段的值是否相等，行号一直递增，比如：有两条记录的值相等，但一个是第一，一个是第二</p>
+</li>
+<li><p>rank：上下两条记录的col2相等时，记录的行号是一样的，但下一个col2值的行号递增N（N是重复的次数），比如：有两条并列第一，下一个是第三，没有第二</p>
+</li>
+<li><p>dense_rank：上下两条记录的col2相等时，下一个col2值的行号递增1，比如：有两条并列第一，下一个是第二</p>
+</li>
+</ol>
+<p><strong>row_number可以实现分页查询</strong></p>
+<h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><pre><code>hive&gt; create table t(name string, sub string, score int) row format delimited fields terminated by &apos;\t&apos;;
+</code></pre><p>数据在附件的a.txt里</p>
+<pre><code>a chinese 98
+a english 90
+d chinese 88
+c english 82
+c math 98
+b math 89
+b chinese 79
+z english 90
+z math 89
+z chinese 80
+e math 99
+e english 87
+d english 90
+</code></pre><p><strong>1. row_number</strong></p>
+<pre><code>hive (test)&gt; select *, row_number() over (partition by sub order by score) as od from t; 
+</code></pre><p><strong>2. rank</strong></p>
+<pre><code>hive (test)&gt; select *, rank() over (partition by sub order by score) as od from t; 
+</code></pre><p><strong>3. dense_ran</strong></p>
+<pre><code>hive (test)&gt; select *, dense_rank() over (partition by sub order by score desc) from t;
+</code></pre><p><strong>业务实例：</strong></p>
+<p>统计每个学科的第一名</p>
+<pre><code>select * from (select *, row_number() over (partition by sub order by score desc) as od from t ) t where od=1;
+</code></pre><p>统计每个学科的前三名</p>
+<pre><code>select * from (select *, row_number() over (partition by sub order by score desc) as od from t ) t where od&lt;=3;
+</code></pre><p>语文成绩是80分的排名是多少</p>
+<pre><code>hive (test)&gt; select od from (select *, row_number() over (partition by sub order by score desc) as od from t ) t where sub=&apos;chinese&apos; and score=80;
+</code></pre><p>分页查询</p>
+<pre><code>hive (test)&gt; select * from (select *, row_number() over () as rn from t) t1 where rn between 1 and 5;
+</code></pre><p> 原文链接：</p>
+<p> <a href="https://www.cnblogs.com/lishouguang/p/4560837.html" target="_blank" rel="noopener">https://www.cnblogs.com/lishouguang/p/4560837.html</a></p>
+<p> —over—</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/CDH集群时钟偏差警报/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1900,7 +2089,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">8</span>
+                <span class="site-state-item-count">9</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1922,7 +2111,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">16</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

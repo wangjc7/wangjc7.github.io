@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-13T07:44:08.000Z</updated>
+  <updated>2018-09-13T08:20:00.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Hive分组取TopN</title>
+    <link href="http://yoursite.com/2018/09/13/Hive%E5%88%86%E7%BB%84%E5%8F%96TopN/"/>
+    <id>http://yoursite.com/2018/09/13/Hive分组取TopN/</id>
+    <published>2018-09-13T08:03:56.000Z</published>
+    <updated>2018-09-13T08:20:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>Hive在0.11.0版本开始加入了row_number、rank、dense_rank分析函数，可以查询分组排序后的top值</p><h3 id="语法："><a href="#语法：" class="headerlink" title="语法："></a>语法：</h3><p>row_number() over ([partition col1] [order by col2])</p><p>rank() over ([partition col1] [order by col2])</p><p>dense_rank() over ([partition col1] [order by col2])</p><p>它们都是根据col1字段分组，然后对col2字段进行排序，对排序后的每行生成一个行号，这个行号从1开始递增<br>col1、col2都可以是多个字段，用’,’分隔</p><p><strong>区别</strong>：</p><ol><li><p>row_number：不管col2字段的值是否相等，行号一直递增，比如：有两条记录的值相等，但一个是第一，一个是第二</p></li><li><p>rank：上下两条记录的col2相等时，记录的行号是一样的，但下一个col2值的行号递增N（N是重复的次数），比如：有两条并列第一，下一个是第三，没有第二</p></li><li><p>dense_rank：上下两条记录的col2相等时，下一个col2值的行号递增1，比如：有两条并列第一，下一个是第二</p></li></ol><p><strong>row_number可以实现分页查询</strong></p><h3 id="实例："><a href="#实例：" class="headerlink" title="实例："></a>实例：</h3><pre><code>hive&gt; create table t(name string, sub string, score int) row format delimited fields terminated by &apos;\t&apos;;</code></pre><p>数据在附件的a.txt里</p><pre><code>a chinese 98a english 90d chinese 88c english 82c math 98b math 89b chinese 79z english 90z math 89z chinese 80e math 99e english 87d english 90</code></pre><p><strong>1. row_number</strong></p><pre><code>hive (test)&gt; select *, row_number() over (partition by sub order by score) as od from t; </code></pre><p><strong>2. rank</strong></p><pre><code>hive (test)&gt; select *, rank() over (partition by sub order by score) as od from t; </code></pre><p><strong>3. dense_ran</strong></p><pre><code>hive (test)&gt; select *, dense_rank() over (partition by sub order by score desc) from t;</code></pre><p><strong>业务实例：</strong></p><p>统计每个学科的第一名</p><pre><code>select * from (select *, row_number() over (partition by sub order by score desc) as od from t ) t where od=1;</code></pre><p>统计每个学科的前三名</p><pre><code>select * from (select *, row_number() over (partition by sub order by score desc) as od from t ) t where od&lt;=3;</code></pre><p>语文成绩是80分的排名是多少</p><pre><code>hive (test)&gt; select od from (select *, row_number() over (partition by sub order by score desc) as od from t ) t where sub=&apos;chinese&apos; and score=80;</code></pre><p>分页查询</p><pre><code>hive (test)&gt; select * from (select *, row_number() over () as rn from t) t1 where rn between 1 and 5;</code></pre><p> 原文链接：</p><p> <a href="https://www.cnblogs.com/lishouguang/p/4560837.html" target="_blank" rel="noopener">https://www.cnblogs.com/lishouguang/p/4560837.html</a></p><p> —over—</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Hive在0.11.0版本开始加入了row_number、rank、dense_rank分析函数，可以查询分组排序后的top值&lt;/p&gt;
+&lt;h3 id=&quot;语法：&quot;&gt;&lt;a href=&quot;#语法：&quot; class=&quot;headerlink&quot; title=&quot;语法：&quot;&gt;&lt;/a&gt;语法：&lt;/h
+      
+    
+    </summary>
+    
+      <category term="hive" scheme="http://yoursite.com/categories/hive/"/>
+    
+    
+      <category term="hive" scheme="http://yoursite.com/tags/hive/"/>
+    
+      <category term="row_number rank dense_rank" scheme="http://yoursite.com/tags/row-number-rank-dense-rank/"/>
+    
+  </entry>
   
   <entry>
     <title>CDH集群时钟偏差警报</title>
