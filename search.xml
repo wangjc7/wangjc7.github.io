@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[CDH集群时钟偏差警报]]></title>
+    <url>%2F2018%2F09%2F13%2FCDH%E9%9B%86%E7%BE%A4%E6%97%B6%E9%92%9F%E5%81%8F%E5%B7%AE%E8%AD%A6%E6%8A%A5%2F</url>
+    <content type="text"><![CDATA[CDH集群总是提示时钟偏差,但是查看ntpd服务是正常工作的. OS Version: CentOS Linux release 7.5.1804 (Core) CDH Version: CDH 5.8.4 于是google一下原理： The clock NTP health check is executed by each agent running on nodes on your cluster. The command executed is: ntpdc -np A timeout of 2 seconds is used, so if the ntp client does not return in 2 seconds, the health check will fail. If there is a result, then the agent script will parse the result text and return a result metric that includes the clock offset. this will be sent to the Host Monitor Management Service for processing. You have 2 options here: If you are convinced there are no problems, you can turn off the Cloudera Manager Server Clock Offset Thresholds health check or adjust it as necessary in the Cloudera Manager management services. Or, if you wish to troubleshoot, check the /var/log/cloudera-scm-agent/cloudera-scm-agent.log file for clues.Search in that file for “ntpdc”. If there are any errors running the command, a stack trace will be provided. The agent merely parses the ntpdc output, so assuming your output looks something like this: ntpdc -np remote local st poll reach delay offset disp ======================================================================= *132.163.4.101 10.17.81.194 1 1024 377 0.02972 0.001681 0.13664 =198.55.111.5 10.17.81.194 2 1024 377 0.01395 0.002177 0.13667 =50.116.55.65 10.17.81.194 2 1024 377 0.07263 0.001220 0.12172 The script will look for a line that starts with an “*” character. So, in our example: *132.163.4.101 10.17.81.194 1 1024 377 0.02972 0.001681 0.13664 Then, it will get the ‘offset’ column.This value is returned to the Host Monitor which, will pull the metric and filter it through your health check configuration to decide if it warrants an alert. Lastly, I’m not aware that anything has changed in the offset health check between CM 5.3 and 5.4, so I would recommend troubleshooting this to try to figure out why clock is offset. Timing is important in hadoop, so it is worth a look. 参考链接： https://community.cloudera.com/t5/Cloudera-Manager-Installation/Cloudera-5-4-x-cluster-randomly-reports-quot-Clock-Offset-Bad/td-p/31166 —over—]]></content>
+      <categories>
+        <category>CDH</category>
+      </categories>
+      <tags>
+        <tag>cloudera-scm-agent</tag>
+        <tag>ntp</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[PageRank算法介绍]]></title>
     <url>%2F2018%2F07%2F25%2FPageRank%E7%AE%97%E6%B3%95%E4%BB%8B%E7%BB%8D%2F</url>
     <content type="text"><![CDATA[正文在PageRank发明之前，搜索引擎采用的还是最原始的关键字匹配技术，于是呢在搜索结果中经常会遇到「挂羊头卖狗肉」的垃圾网站，对这些网站，当时的Yahoo采用还是人工清理的方法。 这时候Google的两位创始人Page和Brin就在想，有没有一种算法，能够给出网页重要性的排序呢？这样就可以优先推荐重要网页，而让那些垃圾网页石沉大海了。Page和Brin发现，网页的超链接结构中就蕴含了重要程度的信息。由于一个网页的超链接指向的主要是与其内容相关的网页，那么我们不难想象，如果有许多网页都同时指向某一个网页，这个网页就一定非常重要。我们将互联网想象成一个流网络，网络的节点就是一个个网页，如果两个网页间存在超链接的关系，那么它们之间就存在一条有向的连边。想象存在一种货币，它们在这个流网络上随机地流动，在任意时刻，每个网页上都会有货币流入，也会有货币流出，当最终达到稳定时，将每个网页持有的货币存量，或者说「财富」的多寡由大到小排序，就得到了网页重要性的排序PageRank。 我们发现排在前面的主要是被较多引用的网页，当然有幸被重要网页引用的网页也会得到较大的PageRank值。当然我们还要考虑这样一种情况，如果遇到不引用任何其他网页的「铁公鸡」，或者网页A仅引用B，B仅引用C，C又仅引用A的「小团体」，货币只会流入不会流出，他们会积累大量的货币，但显然他们不一定是最重要的。为避免这样的情况发生，PageRank还使货币可以以概率e跳到系统中的任意其他节点。或者我们可以想象系统中存在一个「中央政府」，它在每一时刻都从各个网页节点的「财富」中征缴比例为e的「税金」，然后再平均分给每一个网页。 链接：https://www.zhihu.com/question/19555545/answer/]]></content>

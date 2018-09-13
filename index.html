@@ -319,6 +319,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/CDH集群时钟偏差警报/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="andrew.wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="橙子's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/13/CDH集群时钟偏差警报/" itemprop="url">CDH集群时钟偏差警报</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-13T15:24:32+08:00">
+                2018-09-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CDH/" itemprop="url" rel="index">
+                    <span itemprop="name">CDH</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p> CDH集群总是提示时钟偏差,但是查看ntpd服务是正常工作的. </p>
+<p> OS Version:    CentOS Linux release 7.5.1804 (Core)</p>
+<p> CDH Version:    CDH 5.8.4</p>
+<p>于是google一下原理：</p>
+<blockquote>
+<p><strong>The clock NTP health check is executed by each agent running on nodes on your cluster.  The command executed is:</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>ntpdc -np</strong></p>
+</blockquote>
+<blockquote>
+<p><strong>A timeout of 2 seconds is used, so if the ntp client does not return in 2 seconds, the health check will fail.</strong></p>
+</blockquote>
+<p>If there is a result, then the agent script will parse the result text and return a result metric that includes the clock offset.  this will be sent to the Host Monitor Management Service for processing.</p>
+<p>You have 2 options here:  </p>
+<p>If you are convinced there are no problems, you can turn off the Cloudera Manager Server Clock Offset Thresholds health check or adjust it as necessary in the Cloudera Manager management services.</p>
+<p>Or, if you wish to troubleshoot, check the /var/log/cloudera-scm-agent/cloudera-scm-agent.log file for clues.<br>Search in that file for “ntpdc”.  If there are any errors running the command, a stack trace will be provided.</p>
+<p>The agent merely parses the ntpdc output, so assuming your output looks something like this:</p>
+<p>ntpdc -np</p>
+<pre><code> remote           local      st poll reach  delay   offset    disp
+=======================================================================
+*132.163.4.101   10.17.81.194     1 1024  377 0.02972  0.001681 0.13664
+=198.55.111.5    10.17.81.194     2 1024  377 0.01395  0.002177 0.13667
+=50.116.55.65    10.17.81.194     2 1024  377 0.07263  0.001220 0.12172
+</code></pre><p>The script will look for a line that starts with an “*” character.  So, in our example:</p>
+<p>*132.163.4.101   10.17.81.194     1 1024  377 0.02972  0.001681 0.13664</p>
+<p>Then, it will get the ‘offset’ column.<br>This value is returned to the Host Monitor which, will pull the metric and filter it through your health check configuration to decide if it warrants an alert.</p>
+<p>Lastly, I’m not aware that anything has changed in the offset health check between CM 5.3 and 5.4, so I would recommend troubleshooting this to try to figure out why clock is offset.  Timing is important in hadoop, so it is worth a look.</p>
+<p>参考链接：</p>
+<p><a href="https://community.cloudera.com/t5/Cloudera-Manager-Installation/Cloudera-5-4-x-cluster-randomly-reports-quot-Clock-Offset-Bad/td-p/31166" target="_blank" rel="noopener">https://community.cloudera.com/t5/Cloudera-Manager-Installation/Cloudera-5-4-x-cluster-randomly-reports-quot-Clock-Offset-Bad/td-p/31166</a></p>
+<p>—over—</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/25/PageRank算法介绍/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1728,7 +1900,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -1750,7 +1922,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">16</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>
