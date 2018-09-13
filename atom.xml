@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-13T08:20:00.000Z</updated>
+  <updated>2018-09-13T11:45:00.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,42 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>python发送邮件</title>
+    <link href="http://yoursite.com/2018/09/13/python%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6/"/>
+    <id>http://yoursite.com/2018/09/13/python发送邮件/</id>
+    <published>2018-09-13T11:16:23.000Z</published>
+    <updated>2018-09-13T11:45:00.000Z</updated>
+    
+    <content type="html"><![CDATA[<p><strong>代码</strong>：</p><p>emailhelper.py</p><pre><code># -*- coding: UTF-8 -*-import sysimport platformimport smtplibfrom email.header import Headerfrom email.mime.multipart import MIMEMultipartfrom email.mime.text import MIMEText#  SMTP 服务mail_host = &quot;smtp.company.com&quot;  # 设置服务器mail_user = &quot;username@company.com&quot;  # 用户名mail_pass = &quot;password&quot;  # 口令def send_mail( receivers, subject, content, filenames=None):    &quot;&quot;&quot;    :param sender:string    :param receivers:list[string]  # 如果收件人为多个格式[&apos;xx@a.com&apos;,&apos;yy@b.com&apos;]    subject：string    content: string    filename: string    :return:    &quot;&quot;&quot;    sender=mail_user    filenames = [] if filenames is None else filenames  #附件名称    try:        message = MIMEMultipart()        message.attach(MIMEText(content, &apos;plain&apos;, &apos;utf-8&apos;))        message[&apos;Subject&apos;] = Header(subject, &apos;utf-8&apos;)        # message[&apos;to&apos;]格式为：xx@aa.com, yy@bb.com        message[&apos;to&apos;] = &apos;,&apos;.join(receivers)        # 如果附件名称大于0个字符        for filename in filenames:            if filename is not None and len(filename.strip()) &gt; 0:                att1 = MIMEText(open(filename, &apos;rb&apos;).read(), &apos;base64&apos;, &apos;utf-8&apos;)                att1[&quot;Content-Type&quot;] = &apos;application/octet-stream&apos;                # 这里的filename可以任意写，写什么名字，邮件中显示什么名字                att1[&quot;Content-Disposition&quot;] = &apos;attachment; filename=&quot;%s&quot; filename                    message.attach(att1)        smtp_obj = smtplib.SMTP()        smtp_obj.connect(mail_host, 25)  # 25 为 SMTP 端口号        smtp_obj.login(mail_user, mail_pass)        smtp_obj.sendmail(sender, receivers, message.as_string())        smtp_obj.quit()        print &quot;邮件发送成功&quot;    except smtplib.SMTPException, e:        print &quot;Error: 无法发送邮件,code:%s&quot; % e.smtp_code    return</code></pre><p>—over—</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;&lt;strong&gt;代码&lt;/strong&gt;：&lt;/p&gt;
+&lt;p&gt;emailhelper.py&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# -*- coding: UTF-8 -*-
+
+import sys
+import platform
+import smtplib
+from email.h
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+      <category term="smtplib" scheme="http://yoursite.com/tags/smtplib/"/>
+    
+      <category term="email" scheme="http://yoursite.com/tags/email/"/>
+    
+  </entry>
   
   <entry>
     <title>Hive分组取TopN</title>
