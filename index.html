@@ -319,6 +319,158 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/Windows与Linux回车换行符/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="andrew.wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="橙子's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/16/Windows与Linux回车换行符/" itemprop="url">Windows与Linux回车换行符</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-16T21:25:23+08:00">
+                2018-09-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/linux/" itemprop="url" rel="index">
+                    <span itemprop="name">linux</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h3 id="回车、换行的区别"><a href="#回车、换行的区别" class="headerlink" title="回车、换行的区别"></a>回车、换行的区别</h3><p>回车”（Carriage Return）和“换行”（Line Feed）</p>
+<pre><code>符号        ASCII码        意义
+
+\n          10            换行
+
+\r          13            回车CR
+</code></pre><p>‘\r’ 回车，回到当前行的行首，而不会换到下一行，如果接着输出的话，本行以前的内容会被逐一覆盖；</p>
+<p>‘\n’ 换行，换到当前位置的下一行，而不会回到行首；</p>
+<p>Unix系统里，每行结尾只有“&lt;换行&gt;”，即”\n”；<br>Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“\r\n”；<br>Mac系统里，每行结尾是“&lt;回车&gt;”，即”\r”；。</p>
+<p>一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p>
+<p>—end—</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/13/python发送邮件/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2093,154 +2245,13 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/15/单链表反转-Java/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="andrew.wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="橙子's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/15/单链表反转-Java/" itemprop="url">单链表反转(Java)</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-15T23:52:04+08:00">
-                2018-05-15
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/algorithm/" itemprop="url" rel="index">
-                    <span itemprop="name">algorithm</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="单链表反转-Java"><a href="#单链表反转-Java" class="headerlink" title="单链表反转(Java)"></a>单链表反转(Java)</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p><strong>单链表反转</strong>使用p、q、r三个指针配合工作，使得两个节点间的指向反向，同时用r记录剩下的链表。基本流程如下图所示：</p>
-<p><img src="https://upload-images.jianshu.io/upload_images/5266042-f6c75291059014f6.jpg" alt=""></p>
-<h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">public class ReverseList &#123;</span><br><span class="line">    public static <span class="keyword">Node</span> <span class="title">reverseList</span>(<span class="keyword">Node</span> <span class="title">head</span>) &#123;</span><br><span class="line">        <span class="keyword">Node</span> <span class="title">p</span> = new <span class="keyword">Node</span><span class="title">(0</span>);</span><br><span class="line">        <span class="keyword">Node</span> <span class="title">q</span> = new <span class="keyword">Node</span><span class="title">(0</span>);</span><br><span class="line">        <span class="keyword">Node</span> <span class="title">r</span> = new <span class="keyword">Node</span><span class="title">(0</span>);</span><br><span class="line">        p = head;</span><br><span class="line">        q = head.next;</span><br><span class="line">        p.next = null;</span><br><span class="line"></span><br><span class="line">        while (q != null) &#123;</span><br><span class="line">            r = q.next;</span><br><span class="line">            q.next = p;</span><br><span class="line">            p = q;</span><br><span class="line">            q = r;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        head = p;</span><br><span class="line"></span><br><span class="line">        return head;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(<span class="keyword">String</span>[] args) &#123;</span><br><span class="line">        int count = <span class="number">9</span>;</span><br><span class="line">        <span class="keyword">Node</span> <span class="title">t</span> = new <span class="keyword">Node</span><span class="title">(1</span>);</span><br><span class="line">        <span class="keyword">Node</span> <span class="title">x</span> = t;</span><br><span class="line"></span><br><span class="line">        for (int i = <span class="number">2</span>; i <span class="tag">&lt;= count; i++) &#123;</span></span><br><span class="line"><span class="tag">            x = (x.next = new Node(i));</span></span><br><span class="line"><span class="tag">        &#125;</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">        t = reverseList(t);</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">        while (t != null) &#123;</span></span><br><span class="line"><span class="tag">            System.out.print(t.val + " ");</span></span><br><span class="line"><span class="tag">            t = t.next;</span></span><br><span class="line"><span class="tag">        &#125;</span></span><br><span class="line"><span class="tag">    &#125;</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">    public static class Node &#123;</span></span><br><span class="line"><span class="tag">        int val;</span></span><br><span class="line"><span class="tag">        Node next;</span></span><br><span class="line"><span class="tag"></span></span><br><span class="line"><span class="tag">        Node(int v) &#123;</span></span><br><span class="line"><span class="tag">            val = v;</span></span><br><span class="line"><span class="tag">        &#125;</span></span><br><span class="line"><span class="tag">    &#125;</span></span><br><span class="line"><span class="tag">&#125;</span></span><br></pre></td></tr></table></figure>
-<p>转载：<br><a href="http://www.jianshu.com/p/5043be2fc875" target="_blank" rel="noopener">http://www.jianshu.com/p/5043be2fc875</a></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
 
 
           </div>
@@ -2284,7 +2295,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">10</span>
+                <span class="site-state-item-count">11</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2295,7 +2306,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">6</span>
+                <span class="site-state-item-count">7</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -2306,7 +2317,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">19</span>
+                <span class="site-state-item-count">21</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

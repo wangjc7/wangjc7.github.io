@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Windows与Linux回车换行符]]></title>
+    <url>%2F2018%2F09%2F16%2FWindows%E4%B8%8ELinux%E5%9B%9E%E8%BD%A6%E6%8D%A2%E8%A1%8C%E7%AC%A6%2F</url>
+    <content type="text"><![CDATA[回车、换行的区别回车”（Carriage Return）和“换行”（Line Feed） 符号 ASCII码 意义 \n 10 换行 \r 13 回车CR ‘\r’ 回车，回到当前行的行首，而不会换到下一行，如果接着输出的话，本行以前的内容会被逐一覆盖； ‘\n’ 换行，换到当前位置的下一行，而不会回到行首； Unix系统里，每行结尾只有“&lt;换行&gt;”，即”\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“\r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”，即”\r”；。 一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。 —end—]]></content>
+      <categories>
+        <category>linux</category>
+      </categories>
+      <tags>
+        <tag>linux</tag>
+        <tag>/r,/n</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[python发送邮件]]></title>
     <url>%2F2018%2F09%2F13%2Fpython%E5%8F%91%E9%80%81%E9%82%AE%E4%BB%B6%2F</url>
     <content type="text"><![CDATA[代码： emailhelper.py # -*- coding: UTF-8 -*- import sys import platform import smtplib from email.header import Header from email.mime.multipart import MIMEMultipart from email.mime.text import MIMEText # SMTP 服务 mail_host = &quot;smtp.company.com&quot; # 设置服务器 mail_user = &quot;username@company.com&quot; # 用户名 mail_pass = &quot;password&quot; # 口令 def send_mail( receivers, subject, content, filenames=None): &quot;&quot;&quot; :param sender:string :param receivers:list[string] # 如果收件人为多个格式[&apos;xx@a.com&apos;,&apos;yy@b.com&apos;] subject：string content: string filename: string :return: &quot;&quot;&quot; sender=mail_user filenames = [] if filenames is None else filenames #附件名称 try: message = MIMEMultipart() message.attach(MIMEText(content, &apos;plain&apos;, &apos;utf-8&apos;)) message[&apos;Subject&apos;] = Header(subject, &apos;utf-8&apos;) # message[&apos;to&apos;]格式为：xx@aa.com, yy@bb.com message[&apos;to&apos;] = &apos;,&apos;.join(receivers) # 如果附件名称大于0个字符 for filename in filenames: if filename is not None and len(filename.strip()) &gt; 0: att1 = MIMEText(open(filename, &apos;rb&apos;).read(), &apos;base64&apos;, &apos;utf-8&apos;) att1[&quot;Content-Type&quot;] = &apos;application/octet-stream&apos; # 这里的filename可以任意写，写什么名字，邮件中显示什么名字 att1[&quot;Content-Disposition&quot;] = &apos;attachment; filename=&quot;%s&quot; filename message.attach(att1) smtp_obj = smtplib.SMTP() smtp_obj.connect(mail_host, 25) # 25 为 SMTP 端口号 smtp_obj.login(mail_user, mail_pass) smtp_obj.sendmail(sender, receivers, message.as_string()) smtp_obj.quit() print &quot;邮件发送成功&quot; except smtplib.SMTPException, e: print &quot;Error: 无法发送邮件,code:%s&quot; % e.smtp_code return —over—]]></content>

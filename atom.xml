@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-13T11:45:00.000Z</updated>
+  <updated>2018-09-16T13:30:34.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Windows与Linux回车换行符</title>
+    <link href="http://yoursite.com/2018/09/16/Windows%E4%B8%8ELinux%E5%9B%9E%E8%BD%A6%E6%8D%A2%E8%A1%8C%E7%AC%A6/"/>
+    <id>http://yoursite.com/2018/09/16/Windows与Linux回车换行符/</id>
+    <published>2018-09-16T13:25:23.000Z</published>
+    <updated>2018-09-16T13:30:34.000Z</updated>
+    
+    <content type="html"><![CDATA[<h3 id="回车、换行的区别"><a href="#回车、换行的区别" class="headerlink" title="回车、换行的区别"></a>回车、换行的区别</h3><p>回车”（Carriage Return）和“换行”（Line Feed）</p><pre><code>符号        ASCII码        意义\n          10            换行\r          13            回车CR</code></pre><p>‘\r’ 回车，回到当前行的行首，而不会换到下一行，如果接着输出的话，本行以前的内容会被逐一覆盖；</p><p>‘\n’ 换行，换到当前位置的下一行，而不会回到行首；</p><p>Unix系统里，每行结尾只有“&lt;换行&gt;”，即”\n”；<br>Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“\r\n”；<br>Mac系统里，每行结尾是“&lt;回车&gt;”，即”\r”；。</p><p>一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。</p><p>—end—</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h3 id=&quot;回车、换行的区别&quot;&gt;&lt;a href=&quot;#回车、换行的区别&quot; class=&quot;headerlink&quot; title=&quot;回车、换行的区别&quot;&gt;&lt;/a&gt;回车、换行的区别&lt;/h3&gt;&lt;p&gt;回车”（Carriage Return）和“换行”（Line Feed）&lt;/p&gt;
+&lt;pre&gt;
+      
+    
+    </summary>
+    
+      <category term="linux" scheme="http://yoursite.com/categories/linux/"/>
+    
+    
+      <category term="linux" scheme="http://yoursite.com/tags/linux/"/>
+    
+      <category term="/r,/n" scheme="http://yoursite.com/tags/r-n/"/>
+    
+  </entry>
   
   <entry>
     <title>python发送邮件</title>
