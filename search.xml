@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Python_MySql语句插入中内容同时包含单引号和双引号的解决办法]]></title>
+    <url>%2F2018%2F09%2F16%2FPython-MySql%E8%AF%AD%E5%8F%A5%E6%8F%92%E5%85%A5%E4%B8%AD%E5%86%85%E5%AE%B9%E5%90%8C%E6%97%B6%E5%8C%85%E5%90%AB%E5%8D%95%E5%BC%95%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95%2F</url>
+    <content type="text"><![CDATA[在python中调用MySQLdb模块插入数据信息，假设待输入信息data为：Hello’World”! 其中同时包含了单引号和双引号 一般插入语句为 sql = &quot;insert into tb (my_str) values(&apos;%s&apos;)&quot; % (data) cursor.execute(sql) 其中values(‘%s’)中的%s外面也要有引号，这个引号与data中的引号匹配导致了内容错误 解决办法一: MySQLdb.escape_string() 在MySQLdb模块中自带针对mysql的转义函数escape_string()，直接调用即可 sql = &quot;insert into tb (my_str) values(&apos;%s&apos;)&quot; % (MySQLdb.escape_string(data)) cursor.execute(sql) 解决办法二 cursor.execute() cursor.execute()可以接受一个参数，也可以接受两个参数： cursor.execute(&quot;insert into tablename(c1,c2) values(%s, %s)&quot; , (value1,value2) ); 这种格式是接受两个参数，MySQLdb会自动替你对字符串进行转义和加引号，不必再自己进行转义 实例： #-*-coding: utf8 -*- from connectdb import connectDatabase; #connectDatabase是我自己定义的一个连接数据的函数 import MySQLdb; def escape(): cnn = connectDatabase(); cursor = cnn.cursor(); name = &quot;\\&quot;; name2 = &quot;\&quot;&quot; print name,name2; queryli = [(12,name),(12,name2)] print queryli; #cursor.executemany(&quot;insert into resource(cid,name) values(%s, %s)&quot;,queryli); #接受两个参数，MySQLdb会自动替你对字符串进行转义和加引号，不必再自己进行转义 #执行完此语句之后，resource表中多了一条记录： 12 \ #但如果这么写，cursor.execute(&quot;insert into resource(cid,name) values(%s, %s)&quot; % (12,name) ); #这种格式是利用python的字符串格式化自己生成一个query，也就是传给execute一个参数， #此时必须自己对字符串转义和增加引号，即上边的语句是错误的，应该修改为： #name = MySQLdb.escape_string(name); #cursor.execute(&quot;insert into resource(cid,name) values(%s, &apos;%s&apos;)&quot; % (12,name) ); #这样插入的记录才和(1)一样：12 \ cursor.execute(&quot;insert into resource(cid,name) values(%s, %s)&quot; , (12,name) ); cursor.close(); cnn.commit(); cnn.close(); if __name__ == &quot;__main__&quot;: escape(); 解决办法三 当然也可以自己转义字符 将data变为下面的形式,再插入数据库就正确了Hello\’World\”! 具体在python中的转义函数如下： def transferContent(self, content): if content is None: return None else: string = &quot;&quot; for c in content: if c == &apos;&quot;&apos;: string += &apos;\\\&quot;&apos; elif c == &quot;&apos;&quot;: string += &quot;\\\&apos;&quot; elif c == &quot;\\&quot;: string += &quot;\\\\&quot; else: string += c return string —end—]]></content>
+      <categories>
+        <category>python</category>
+      </categories>
+      <tags>
+        <tag>MySQLdb</tag>
+        <tag>escape string</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Windows与Linux回车换行符]]></title>
     <url>%2F2018%2F09%2F16%2FWindows%E4%B8%8ELinux%E5%9B%9E%E8%BD%A6%E6%8D%A2%E8%A1%8C%E7%AC%A6%2F</url>
     <content type="text"><![CDATA[回车、换行的区别回车”（Carriage Return）和“换行”（Line Feed） 符号 ASCII码 意义 \n 10 换行 \r 13 回车CR ‘\r’ 回车，回到当前行的行首，而不会换到下一行，如果接着输出的话，本行以前的内容会被逐一覆盖； ‘\n’ 换行，换到当前位置的下一行，而不会回到行首； Unix系统里，每行结尾只有“&lt;换行&gt;”，即”\n”；Windows系统里面，每行结尾是“&lt;回车&gt;&lt;换行&gt;”，即“\r\n”；Mac系统里，每行结尾是“&lt;回车&gt;”，即”\r”；。 一个直接后果是，Unix/Mac系统下的文件在Windows里打开的话，所有文字会变成一行；而Windows里的文件在Unix/Mac下打开的话，在每行的结尾可能会多出一个^M符号。 —end—]]></content>

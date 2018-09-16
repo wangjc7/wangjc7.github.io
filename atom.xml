@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-16T13:30:34.000Z</updated>
+  <updated>2018-09-16T14:18:56.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Python_MySql语句插入中内容同时包含单引号和双引号的解决办法</title>
+    <link href="http://yoursite.com/2018/09/16/Python-MySql%E8%AF%AD%E5%8F%A5%E6%8F%92%E5%85%A5%E4%B8%AD%E5%86%85%E5%AE%B9%E5%90%8C%E6%97%B6%E5%8C%85%E5%90%AB%E5%8D%95%E5%BC%95%E5%8F%B7%E5%92%8C%E5%8F%8C%E5%BC%95%E5%8F%B7%E7%9A%84%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95/"/>
+    <id>http://yoursite.com/2018/09/16/Python-MySql语句插入中内容同时包含单引号和双引号的解决办法/</id>
+    <published>2018-09-16T14:07:11.000Z</published>
+    <updated>2018-09-16T14:18:56.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>在python中调用MySQLdb模块插入数据信息，假设待输入信息data为：Hello’World”!</p><p>其中同时包含了单引号和双引号</p><p>一般插入语句为</p><pre><code>sql = &quot;insert into tb (my_str) values(&apos;%s&apos;)&quot; % (data)cursor.execute(sql)</code></pre><p>其中values(‘%s’)中的%s外面也要有引号，这个引号与data中的引号匹配导致了内容错误</p><p><strong>解决办法一:</strong></p><p>MySQLdb.escape_string()</p><p>在MySQLdb模块中自带针对mysql的转义函数escape_string()，直接调用即可</p><pre><code>sql = &quot;insert into tb (my_str) values(&apos;%s&apos;)&quot; % (MySQLdb.escape_string(data))cursor.execute(sql)</code></pre><p><strong>解决办法二</strong></p><p>cursor.execute()</p><p>cursor.execute()可以接受一个参数，也可以接受两个参数：</p><pre><code>cursor.execute(&quot;insert into tablename(c1,c2) values(%s, %s)&quot; , (value1,value2) );</code></pre><p>这种格式是接受两个参数，MySQLdb会自动替你对字符串进行转义和加引号，不必再自己进行转义</p><p>实例：</p><pre><code>#-*-coding: utf8 -*-from connectdb import connectDatabase; #connectDatabase是我自己定义的一个连接数据的函数import MySQLdb;def escape():    cnn = connectDatabase();    cursor = cnn.cursor();    name = &quot;\\&quot;;     name2 = &quot;\&quot;&quot;    print name,name2;    queryli = [(12,name),(12,name2)]    print queryli;    #cursor.executemany(&quot;insert into resource(cid,name) values(%s, %s)&quot;,queryli);    #接受两个参数，MySQLdb会自动替你对字符串进行转义和加引号，不必再自己进行转义    #执行完此语句之后，resource表中多了一条记录： 12   \    #但如果这么写，cursor.execute(&quot;insert into resource(cid,name) values(%s, %s)&quot; % (12,name) );    #这种格式是利用python的字符串格式化自己生成一个query，也就是传给execute一个参数，    #此时必须自己对字符串转义和增加引号，即上边的语句是错误的，应该修改为：    #name = MySQLdb.escape_string(name);    #cursor.execute(&quot;insert into resource(cid,name) values(%s, &apos;%s&apos;)&quot; % (12,name) );    #这样插入的记录才和(1)一样：12   \    cursor.execute(&quot;insert into resource(cid,name) values(%s, %s)&quot; , (12,name) );    cursor.close();     cnn.commit();    cnn.close();if __name__ == &quot;__main__&quot;:    escape();</code></pre><p><strong>解决办法三</strong></p><p>当然也可以自己转义字符</p><p>将data变为下面的形式,再插入数据库就正确了<br>Hello\’World\”!</p><p>具体在python中的转义函数如下：</p><pre><code>def transferContent(self, content):        if content is None:            return None        else:            string = &quot;&quot;            for c in content:                if c == &apos;&quot;&apos;:                    string += &apos;\\\&quot;&apos;                elif c == &quot;&apos;&quot;:                    string += &quot;\\\&apos;&quot;                elif c == &quot;\\&quot;:                    string += &quot;\\\\&quot;                else:                    string += c            return string</code></pre><p>—end—</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;在python中调用MySQLdb模块插入数据信息，假设待输入信息data为：Hello’World”!&lt;/p&gt;
+&lt;p&gt;其中同时包含了单引号和双引号&lt;/p&gt;
+&lt;p&gt;一般插入语句为&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;sql = &amp;quot;insert into tb (my_s
+      
+    
+    </summary>
+    
+      <category term="python" scheme="http://yoursite.com/categories/python/"/>
+    
+    
+      <category term="MySQLdb" scheme="http://yoursite.com/tags/MySQLdb/"/>
+    
+      <category term="escape string" scheme="http://yoursite.com/tags/escape-string/"/>
+    
+  </entry>
   
   <entry>
     <title>Windows与Linux回车换行符</title>
