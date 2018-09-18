@@ -319,6 +319,167 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/18/superset安装/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="andrew.wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="橙子's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/2018/09/18/superset安装/" itemprop="url">superset安装</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-09-18T14:48:50+08:00">
+                2018-09-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/superset/" itemprop="url" rel="index">
+                    <span itemprop="name">superset</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h2 id="superset"><a href="#superset" class="headerlink" title="superset"></a>superset</h2><p>Superset 是 Airbnb 开源的数据分析与可视化平台，同时也是由 Python 语言构建的轻量级 BI 系统。Superset 可实现对 TB 量级数据进行处理，兼容常见的数十种关系或非关系型数据库，并在内部实现 SQL 编辑查询等操作。除此之外，基于 Web 服务的 Superset 可实现多用户协使用，并可针对不同角色进行权限管理。</p>
+<h2 id="Install-for-linux"><a href="#Install-for-linux" class="headerlink" title="Install(for linux):"></a>Install(for linux):</h2><pre><code>1.安装pip
+2.安装virtualenv
+3.安装mysqlclient,impyla,python-ldap,redis
+4.安装superset
+pip install -i https://pypi.tuna.tsinghua.edu.cn/simple superset==0.22.1
+5.修改config.py配置文件，修改元数据存储为Mysql
+SQLALCHEMY_DATABASE_URI = &apos;mysql://username:password@ip/dbname?charset=utf8&apos;
+6.创建管理员用户和密码
+fabmanager create-admin --app superset
+7.初始化数据
+superset db upgrade
+8.创建默认角色和权限
+superset init
+9.启动：
+superset runserver -p 8388 -d   # -d为debug模式启动
+10.访问：
+http://ip:8388     admin/admin
+</code></pre><p>superser主页：<br><a href="https://github.com/apache/incubator-superset" target="_blank" rel="noopener">https://github.com/apache/incubator-superset</a>    </p>
+<p>—end—</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/09/16/Python-MySql语句插入中内容同时包含单引号和双引号的解决办法/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -2119,165 +2280,6 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/05/17/Impala优化基本方案/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="andrew.wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="橙子's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/05/17/Impala优化基本方案/" itemprop="url">Impala优化基本方案</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-17T00:30:12+08:00">
-                2018-05-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/impala/" itemprop="url" rel="index">
-                    <span itemprop="name">impala</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h1 id="理论"><a href="#理论" class="headerlink" title="理论"></a>理论</h1><p>本文源自cloudera官网上的Impala文档，原名为《Impala Performance Guidelines and Best Practices》。主要介绍了为了提升impala性能应该考虑的一些事情，这些条目算是对于性能提升最基本的约束了，条目分别如下：</p>
-<ol>
-<li>选择合适的文件存储格式，既然使用impala，无非就是为了一个目的：性能好/资源消耗少，Impala为了做到通用性，也就是为了更好的hive无缝连接，支持了大部分Hive支持的文件格式，例如Text、Avro、RCFile、Parquet等（不支持ORC），但是为了实现更快的ad-hoc查询（基本上都是OLAP查询，查询部分列，聚合，分析），我们基本上都会选择使用Parquet格式作为数据文件存储格式，即使你的数据导入到hive中存储的使用的是其它格式（甚至通过自定义serde解析，例如Json），仍然建议你新建一个Parquet格式的表，然后进行一次数据的转换。因此这个条目可以看做是：请选用Parquet作为文件存储格式！</li>
-<li>选择合适的Partition粒度，分区的个数通常是根据业务数据来的，通常时间分区（例如日期/月份）是少不了的，例如对于一个支持多终端的应用，可能在时间分区下面再加一层终端类型的分区，设置对于每一个终端的不同操作在进行一层分区，根据唯物辩证法，凡事都需要保持一个度，那么就从两个极端的情况下来分析分区的粒度如何确定：1：分区过少:，整个表不使用分区，或者只有一个日期的分区，这样会导致频繁的查询某一个终端的数据不得不扫描整天的数据甚至整个表的数据，这是一种浪费；2、分区过多，对于每一个要统计的维度都创建一个分区，这样对于任何一个维度=’xxx’的查询都只需要扫描精确需要的数据，但是这样会导致大量的数据目录，进而导致大量的文件需要扫描，这对于查询优化器是一个灾难。因此最终的建议是：根据查询需求确定分区的粒度，根据每一个分区的成员个数预估总的分区数，保证一个表的分区数不超过30000（经验之谈？），避免过小的分区。</li>
-<li>尽量分区的成员的长度，目前分区字段可以支持数值类型和字符串，但是这里推荐尽可能的使用合适的整数（一般用0-256就可以保存一个分区成员的映射了，否则分区会很多）而非原始的字符串，可以在外面建立字符串到整数的映射以保存原始信息，这个约束的主要原因是每一个分区会占用一个目录，每一个目录名又会在NameNode中占用一定的内存，所以不光光是对于Impala而言，对于使用Hadoop的用户而言，尽量减小文件目录的长度。</li>
-<li>选择合适的Parquet Block大小，在条目1中已经明确，要使用Impala获得较快的查询性能，那么就老老实实的使用Parquet作为存储格式，而每一个Parquet的Block大小又有什么影响呢，这里暂且把Block的大小理解成一个Parquet分区的大小，在存储上表现为文件大小，如果文件过大，那么会导致这个文件只会一个Impalad进程处理，这样大大降低了Impala的并行处理能力；而如果文件过小则会导致大量的小文件，在带来并发执行的同时也会带来大量的随机I/O的影响，因此需要对于特定的数据进行不同的parquet Block大小测试以寻求最适合该数据集的Block大小。</li>
-<li>收集表和分区的统计信息，在执行完数据导入之后，建议使用 COMPUTE STATS语句收集表的统计信息，当然也可以只收集某一个分区的统计信息。</li>
-<li>减少返回结果大小，如果需要统计聚合，直接在SQL中完成，尽可能的在where中执行过滤而不要查出来之后在应用端做过滤，对于查询结果尽可能使用LIMIT限制返回结果集大小；避免大量的结果展示在终端，可以考虑通过INSERT xxx的方式把结果输出到文件，或者通过impala-shell参数将结果重定向。</li>
-<li>对于执行性能较差的查询使用EXPLAIN分析原因。</li>
-<li>最后，查询操作系统配置、查看系统使用负载，可以使用Query Profile工具来探测。</li>
-</ol>
-<p>上面的这些条目是最基本的应对性能调优的方案，主要包括：使用Parquet格式存储数据、分区粒度要确定好，保证整个表的分区数不要太多（目录不要太多），每一个分区下不要存在过多的小文件（选择合适的Parquet文件大小），收集统计信息使得查询优化器能够选择更好的查询方案，最后要学会使用EXPLAIN和Profile功能分析性能问题所在。</p>
-<h1 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h1><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br></pre></td><td class="code"><pre><span class="line">[hadoop15:21000] &gt;  explain <span class="string">"此处sql省略"</span>，原SQL执行时间7'</span><br><span class="line">+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">|<span class="string"> Explain String                                                                                                                                                                                                                                                                                         </span>|</span><br><span class="line">+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">|<span class="string"> Estimated Per-Host Requirements: Memory=432.00MB VCores=3                                                                                                                                                                                                                                              </span>|</span><br><span class="line">|<span class="string"> WARNING: The following tables are missing relevant table and/or column statistics.                                                                                                                                                                                                                     </span>|</span><br><span class="line">|<span class="string"> db1.tab1, db2.tab2                                                                                                                                                                                                                                                              </span>|</span><br><span class="line">|<span class="string">                                                                                                                                                                                                                                                                                                        </span>|</span><br><span class="line">|<span class="string"> 26:EXCHANGE [UNPARTITIONED]                                                                                                                                                                                                                                                                            </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 14:HASH JOIN [LEFT OUTER JOIN, PARTITIONED]                                                                                                                                                                                                                                                            </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                               </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">--25:EXCHANGE [HASH(to_date(...))]                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  12:AGGREGATE [FINALIZE]                                                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  output: ...                                                                                                                                                                                                                                                                        </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                                    </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  24:AGGREGATE                                                                                                                                                                                                                                                                                        </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                        </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  23:EXCHANGE [HASH(...)]                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  11:AGGREGATE [STREAMING]                                                                                                                                                                                                                                                                            </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                       </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  10:HASH JOIN [LEFT OUTER JOIN, PARTITIONED]                                                                                                                                                                                                                                                         </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  hash predicates: ...                                                                                                                                                                                                                                                       </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  other predicates: ... </span></span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">--22:EXCHANGE [HASH(...)]                                                                                                                                                                                                                                                                  </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  09:SCAN HDFS [...]                                                                                                                                                                                                                                                            </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">     partitions=1/1 files=4 size=572.48MB                                                                                                                                                                                                                                                          </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">     predicates: ...                                                                                                                                            </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  21:EXCHANGE [HASH(...)]                                                                                                                                                                                                                                                                     </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  08:SCAN HDFS [...]                                                                                                                                                                                                                                                               </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">     partitions=2360/2360 files=2360 size=1.84GB                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">     predicates: ...                                                                                                                                                                                    </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 13:HASH JOIN [RIGHT OUTER JOIN, PARTITIONED]                                                                                                                                                                                                                                                           </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  hash predicates: ...                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">--02:AGGREGATE [FINALIZE]                                                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  output: ...                                                                                                                                                                                                                                                                          </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                                       </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  20:AGGREGATE                                                                                                                                                                                                                                                                                        </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  19:EXCHANGE [HASH(...)]                                                                                                                                                                                                                                                </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  01:AGGREGATE [STREAMING]                                                                                                                                                                                                                                                                            </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  00:SCAN HDFS [warehouse.mar_house]                                                                                                                                                                                                                                                                  </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">     partitions=1/1 files=4 size=572.48MB                                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">     predicates: ...                                                                                                                                  </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 07:AGGREGATE [FINALIZE]                                                                                                                                                                                                                                                                                </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> 18:AGGREGATE                                                                                                                                                                                                                                                                                           </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                        </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 17:EXCHANGE [HASH(...)]                                                                                                                                                                                                                                                </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 06:AGGREGATE [STREAMING]                                                                                                                                                                                                                                                                               </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  group by: ...                                                                                                                                                                                                                                         </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 05:HASH JOIN [LEFT OUTER JOIN, PARTITIONED]                                                                                                                                                                                                                                                            </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  hash predicates: ...                                                                                                                                                                                                                                                         </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  other predicates: ...    </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">--16:EXCHANGE [HASH(...)]                                                                                                                                                                                                                                                                     </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  </span>|<span class="string">                                                                                                                                                                                                                                                                                                   </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">  04:SCAN HDFS [warehouse.mar_house mh]                                                                                                                                                                                                                                                               </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">     partitions=1/1 files=4 size=572.48MB                                                                                                                                                                                                                                                             </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">     predicates: ...                                                                                                                                              </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 15:EXCHANGE [HASH(...)]                                                                                                                                                                                                                                                                        </span>|</span><br><span class="line">|<span class="string"> </span>|<span class="string">                                                                                                                                                                                                                                                                                                      </span>|</span><br><span class="line">|<span class="string"> 03:SCAN HDFS [...]                                                                                                                                                                                                                                                                  </span>|</span><br><span class="line">|<span class="string">    partitions=2360/2360 files=2360 size=1.84GB                                                                                                                                                                                                                                                         </span>|</span><br><span class="line">|<span class="string">    predicates: ...                                                                                                                                                                                         </span>|</span><br><span class="line">+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+</span><br><span class="line">Fetched 85 row(s) in 0.26s</span><br></pre></td></tr></table></figure>
-<p>备注：由于sql为生产代码，不方便公开，仅适用示意代码，不影响表达主题<br>注意这行：</p>
-<p>WARNING: The following tables are missing relevant table and/or column statistics.</p>
-<p>db1.tab1, db2.tab2 </p>
-<p>因此考虑对这两张表收集统计信息</p>
-<figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">[hadoop15:21000] &gt; compute stats  db1.tab1;</span><br><span class="line">Query: compute stats  db1.tab1</span><br><span class="line"><span class="code">+-------------------------------------------+</span></span><br><span class="line">| summary                                   |</span><br><span class="line"><span class="code">+-------------------------------------------+</span></span><br><span class="line">| Updated 1 partition(s) and 100 column(s). |</span><br><span class="line"><span class="code">+-------------------------------------------+</span></span><br><span class="line">Fetched 1 row(s) in 4.87s</span><br><span class="line">[hadoop15:21000] &gt; compute stats db2.tab2;</span><br><span class="line">Query: compute stats db2.tab2</span><br><span class="line"><span class="code">+---------------------------------------------+</span></span><br><span class="line">| summary                                     |</span><br><span class="line"><span class="code">+---------------------------------------------+</span></span><br><span class="line">| Updated 2360 partition(s) and 96 column(s). |</span><br><span class="line"><span class="code">+---------------------------------------------+</span></span><br><span class="line">Fetched 1 row(s) in 148.34s</span><br><span class="line">[hadoop15:21000] &gt; </span><br><span class="line">[hadoop15:21000] &gt;  再次执行SQL</span><br><span class="line"><span class="code">+------------+</span>----------<span class="code">+-------------+</span>-----------<span class="code">+-------------+</span>----------结果集</span><br><span class="line"><span class="code">+------------+</span>----------<span class="code">+-------------+</span>-----------<span class="code">+-------------+</span>-----------+</span><br><span class="line">Fetched 10 row(s) in 0.94s</span><br></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2328,7 +2330,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-count">13</span>
                 <span class="site-state-item-name">posts</span>
               </a>
             </div>
@@ -2339,7 +2341,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
             
             <div class="site-state-item site-state-categories">
               <a href="/categories/index.html">
-                <span class="site-state-item-count">7</span>
+                <span class="site-state-item-count">8</span>
                 <span class="site-state-item-name">categories</span>
               </a>
             </div>
@@ -2350,7 +2352,7 @@ hive&gt; select find_in_set(‘at’,&apos;ef,ab,de’) from dual;
             
             <div class="site-state-item site-state-tags">
               <a href="/tags/index.html">
-                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-count">25</span>
                 <span class="site-state-item-name">tags</span>
               </a>
             </div>

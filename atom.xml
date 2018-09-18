@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2018-09-16T14:18:56.000Z</updated>
+  <updated>2018-09-18T07:07:16.000Z</updated>
   <id>http://yoursite.com/</id>
   
   <author>
@@ -15,6 +15,33 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>superset安装</title>
+    <link href="http://yoursite.com/2018/09/18/superset%E5%AE%89%E8%A3%85/"/>
+    <id>http://yoursite.com/2018/09/18/superset安装/</id>
+    <published>2018-09-18T06:48:50.000Z</published>
+    <updated>2018-09-18T07:07:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<h2 id="superset"><a href="#superset" class="headerlink" title="superset"></a>superset</h2><p>Superset 是 Airbnb 开源的数据分析与可视化平台，同时也是由 Python 语言构建的轻量级 BI 系统。Superset 可实现对 TB 量级数据进行处理，兼容常见的数十种关系或非关系型数据库，并在内部实现 SQL 编辑查询等操作。除此之外，基于 Web 服务的 Superset 可实现多用户协使用，并可针对不同角色进行权限管理。</p><h2 id="Install-for-linux"><a href="#Install-for-linux" class="headerlink" title="Install(for linux):"></a>Install(for linux):</h2><pre><code>1.安装pip2.安装virtualenv3.安装mysqlclient,impyla,python-ldap,redis4.安装supersetpip install -i https://pypi.tuna.tsinghua.edu.cn/simple superset==0.22.15.修改config.py配置文件，修改元数据存储为MysqlSQLALCHEMY_DATABASE_URI = &apos;mysql://username:password@ip/dbname?charset=utf8&apos;6.创建管理员用户和密码fabmanager create-admin --app superset7.初始化数据superset db upgrade8.创建默认角色和权限superset init9.启动：superset runserver -p 8388 -d   # -d为debug模式启动10.访问：http://ip:8388     admin/admin</code></pre><p>superser主页：<br><a href="https://github.com/apache/incubator-superset" target="_blank" rel="noopener">https://github.com/apache/incubator-superset</a>    </p><p>—end—</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;h2 id=&quot;superset&quot;&gt;&lt;a href=&quot;#superset&quot; class=&quot;headerlink&quot; title=&quot;superset&quot;&gt;&lt;/a&gt;superset&lt;/h2&gt;&lt;p&gt;Superset 是 Airbnb 开源的数据分析与可视化平台，同时也是由 Python 语
+      
+    
+    </summary>
+    
+      <category term="superset" scheme="http://yoursite.com/categories/superset/"/>
+    
+    
+      <category term="data analysis" scheme="http://yoursite.com/tags/data-analysis/"/>
+    
+      <category term="superset" scheme="http://yoursite.com/tags/superset/"/>
+    
+  </entry>
   
   <entry>
     <title>Python_MySql语句插入中内容同时包含单引号和双引号的解决办法</title>
