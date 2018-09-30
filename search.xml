@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[JUnit-4.12使用报java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing错误]]></title>
+    <url>%2F2018%2F09%2F30%2FJUnit-4-12%E4%BD%BF%E7%94%A8%E6%8A%A5java-lang-NoClassDefFoundError-org-hamcrest-SelfDescribing%E9%94%99%E8%AF%AF%2F</url>
+    <content type="text"><![CDATA[现象使用最新的JUnit版本，是4.12，结果尝试使用发现总是报java.lang.NoClassDefFoundError: org/hamcrest/SelfDescribing这样的错误。 原因上网查了一下，一般的解决方案是，换一个低一点的版本就好了。还有人说，是缺少hamcrest的包。去官网又看了一下，结果发现这样一段话： junit.jar: Includes the Hamcrest classes. The simple all-in-one solution to get started quickly.Starting with version 4.11, Hamcrest is no longer included in this jar. junit-dep.jar: Only includes the JUnit classes but not Hamcrest. Lets you use a different Hamcrest version. 注意黑色加下划线的部分。说明4.1.2中没有hamcrest包了，不知道作者是怎么想的。 解决方法两种 (1)换成junit-4.8.jar (2)junit-4.12.jar + hamcrest-core-1.3.jar 参考： https://www.cnblogs.com/anny0404/p/5275595.html —end—]]></content>
+      <categories>
+        <category>java</category>
+      </categories>
+      <tags>
+        <tag>junit</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[superset安装]]></title>
     <url>%2F2018%2F09%2F18%2Fsuperset%E5%AE%89%E8%A3%85%2F</url>
     <content type="text"><![CDATA[supersetSuperset 是 Airbnb 开源的数据分析与可视化平台，同时也是由 Python 语言构建的轻量级 BI 系统。Superset 可实现对 TB 量级数据进行处理，兼容常见的数十种关系或非关系型数据库，并在内部实现 SQL 编辑查询等操作。除此之外，基于 Web 服务的 Superset 可实现多用户协使用，并可针对不同角色进行权限管理。 Install(for linux):1.安装pip 2.安装virtualenv 3.安装mysqlclient,impyla,python-ldap,redis 4.安装superset pip install -i https://pypi.tuna.tsinghua.edu.cn/simple superset==0.22.1 5.修改config.py配置文件，修改元数据存储为Mysql SQLALCHEMY_DATABASE_URI = &apos;mysql://username:password@ip/dbname?charset=utf8&apos; 6.创建管理员用户和密码 fabmanager create-admin --app superset 7.初始化数据 superset db upgrade 8.创建默认角色和权限 superset init 9.启动： superset runserver -p 8388 -d # -d为debug模式启动 10.访问： http://ip:8388 admin/admin superser主页：https://github.com/apache/incubator-superset —end—]]></content>
